@@ -5,13 +5,10 @@
     "moduleResolution": "node",
     "rootDir": "./src",
     "outDir": "./dist",
-
     "strict": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }
