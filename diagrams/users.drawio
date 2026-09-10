@@ -1,0 +1,156 @@
+<mxfile host="Electron" agent="Draw.io" version="24.0.0" type="device">
+  <diagram id="users-module" name="Users">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2471A3;strokeColor=none;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="&lt;font style=&quot;font-size:20px;&quot; color=&quot;#FFFFFF&quot;&gt;USERS MODULE&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot; color=&quot;#A9CCE3&quot;&gt;Authentication &amp;middot; Authorization &amp;middot; Profiles&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="300" y="25" width="600" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e-users" value="&lt;b&gt;User&lt;/b&gt;" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;fillColor=#2471A3;strokeColor=#1A5276;fontColor=#FFFFFF;fontSize=13;rounded=1;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="120" width="360" height="421" as="geometry" />
+        </mxCell>
+        <mxCell id="u-row1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D4E6F1;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="30" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r1c1" value="&lt;font color=&quot;#1A5276&quot;&gt;_id&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row1">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r1c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;ObjectId&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row1">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-row2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#EBF5FB;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="56" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r2c1" value="&lt;font color=&quot;#1A5276&quot;&gt;name&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row2">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r2c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;String&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row2">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-row3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D4E6F1;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="82" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r3c1" value="&lt;font color=&quot;#1A5276&quot;&gt;email&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row3">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r3c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;String &amp;middot; unique&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row3">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-row4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#EBF5FB;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="108" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r4c1" value="&lt;font color=&quot;#1A5276&quot;&gt;password&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row4">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r4c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;String &amp;middot; bcrypt hash&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row4">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-row5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D4E6F1;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="134" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r5c1" value="&lt;font color=&quot;#1A5276&quot;&gt;phone&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row5">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r5c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;String&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row5">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-row6" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#EBF5FB;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="160" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r6c1" value="&lt;font color=&quot;#1A5276&quot;&gt;role&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row6">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r6c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;enum: user | admin&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row6">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-row7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D4E6F1;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="186" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r7c1" value="&lt;font color=&quot;#1A5276&quot;&gt;avatar&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row7">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r7c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;String &amp;middot; image URL&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row7">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-row8" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#EBF5FB;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="212" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r8c1" value="&lt;font color=&quot;#1A5276&quot;&gt;address&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row8">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r8c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;String&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row8">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-row9" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D4E6F1;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="238" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r9c1" value="&lt;font color=&quot;#1A5276&quot;&gt;passwordResetToken&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row9">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r9c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;String &amp;middot; nullable&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row9">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-row10" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#EBF5FB;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="264" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r10c1" value="&lt;font color=&quot;#1A5276&quot;&gt;passwordResetExpires&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row10">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r10c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Date &amp;middot; nullable&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row10">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-row11" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D4E6F1;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="290" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r11c1" value="&lt;font color=&quot;#1A5276&quot;&gt;isVerified&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row11">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r11c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Boolean &amp;middot; default false&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row11">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-row12" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#EBF5FB;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="316" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r12c1" value="&lt;font color=&quot;#1A5276&quot;&gt;createdAt&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row12">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r12c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Date &amp;middot; auto&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row12">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-row13" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D4E6F1;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-users">
+          <mxGeometry width="360" height="26" as="geometry"><mxPoint y="342" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="u-r13c1" value="&lt;font color=&quot;#1A5276&quot;&gt;updatedAt&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row13">
+          <mxGeometry width="180" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u-r13c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Date &amp;middot; auto&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="u-row13">
+          <mxGeometry width="180" height="26" as="geometry"><mxPoint x="180" as="offset" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="notes-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="700" y="120" width="440" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="notes-title" value="&lt;b&gt;Module Notes&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#2471A3;" vertex="1" parent="1">
+          <mxGeometry x="712" y="128" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="notes-body" value="&lt;div style=&quot;font-size:11px;line-height:1.5;color:#444;&quot;&gt;&lt;b&gt;&amp;bull; Password Flow&lt;/b&gt;&amp;nbsp;bcrypt hashing &amp;amp; comparison&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;bull; Password reset via nodemailer (token + expiry)&lt;br&gt;&lt;b&gt;&amp;bull; Auth&lt;/b&gt;&amp;nbsp;JWT token issued on login/register&lt;br&gt;&lt;b&gt;&amp;bull; Roles&lt;/b&gt;&amp;nbsp;admin can manage products &amp;amp; orders&lt;br&gt;&lt;b&gt;&amp;bull; Validation&lt;/b&gt;&amp;nbsp;express-validator in routes&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="712" y="155" width="400" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rel-title" value="&lt;b&gt;Relationships with Other Modules&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;fontColor=#2471A3;" vertex="1" parent="1">
+          <mxGeometry x="700" y="360" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-row1" value="&lt;b&gt;1 : N&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Cart&lt;/b&gt; &amp;mdash; users.cart (ref)&lt;br&gt;&lt;b&gt;1 : N&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Wishlist&lt;/b&gt; &amp;mdash; users.wishlist (ref)&lt;br&gt;&lt;b&gt;1 : N&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Orders&lt;/b&gt; &amp;mdash; orders.user (ref)&lt;br&gt;&lt;b&gt;1 : N&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Ratings&lt;/b&gt; &amp;mdash; ratings.user (ref)&lt;br&gt;&lt;b&gt;1 : N&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Reviews&lt;/b&gt; &amp;mdash; reviews.user (ref)&lt;br&gt;&lt;b&gt;1 : N&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Payments&lt;/b&gt; &amp;mdash; payments.user (ref)" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;lineHeight=18;" vertex="1" parent="1">
+          <mxGeometry x="700" y="390" width="460" height="110" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

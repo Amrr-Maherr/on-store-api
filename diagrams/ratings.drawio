@@ -1,0 +1,84 @@
+<mxfile host="Electron" agent="Draw.io" version="24.0.0" type="device">
+  <diagram id="ratings-module" name="Ratings">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CA6F1E;strokeColor=none;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="&lt;font style=&quot;font-size:20px;&quot; color=&quot;#FFFFFF&quot;&gt;RATINGS MODULE&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot; color=&quot;#FAD7A0&quot;&gt;Product Ratings &amp;middot; Star Values&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="300" y="25" width="600" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e-rat" value="&lt;b&gt;Rating&lt;/b&gt;" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;fillColor=#E67E22;strokeColor=#CA6F1E;fontColor=#FFFFFF;fontSize=13;rounded=1;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="400" height="211" as="geometry" />
+        </mxCell>
+        <mxCell id="rt-row1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FDEBD0;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-rat">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="30" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="rt-r1c1" value="&lt;font color=&quot;#CA6F1E&quot;&gt;_id&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="rt-row1">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rt-r1c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;ObjectId&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="rt-row1">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="rt-row2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FEF9E7;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-rat">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="56" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="rt-r2c1" value="&lt;font color=&quot;#CA6F1E&quot;&gt;user (ref)&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="rt-row2">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rt-r2c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;ObjectId &amp;rarr; Users&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="rt-row2">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="rt-row3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FDEBD0;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-rat">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="82" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="rt-r3c1" value="&lt;font color=&quot;#CA6F1E&quot;&gt;product (ref)&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="rt-row3">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rt-r3c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;ObjectId &amp;rarr; Products&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="rt-row3">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="rt-row4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FEF9E7;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-rat">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="108" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="rt-r4c1" value="&lt;font color=&quot;#CA6F1E&quot;&gt;value&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="rt-row4">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rt-r4c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Number &amp;middot; 1 to 5&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="rt-row4">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="rt-row5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#FDEBD0;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-rat">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="134" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="rt-r5c1" value="&lt;font color=&quot;#CA6F1E&quot;&gt;createdAt&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="rt-row5">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rt-r5c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Date &amp;middot; auto&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="rt-row5">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="notes-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="640" y="120" width="440" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="notes-title" value="&lt;b&gt;Business Logic&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#E67E22;" vertex="1" parent="1">
+          <mxGeometry x="652" y="128" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="notes-body" value="&lt;div style=&quot;font-size:11px;line-height:1.6;color:#444;&quot;&gt;&lt;b&gt;&amp;bull; One rating per user-product&lt;/b&gt;&amp;nbsp;pair (unique index)&lt;br&gt;&lt;b&gt;&amp;bull; Upsert&lt;/b&gt;&amp;nbsp;re-submitting updates existing value&lt;br&gt;&lt;b&gt;&amp;bull; Aggregate to product&lt;/b&gt;&amp;nbsp;average rating &amp;amp; count updated on product&lt;br&gt;&lt;b&gt;&amp;bull; Validation&lt;/b&gt;&amp;nbsp;express-validator in routes&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="652" y="155" width="400" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rel-title" value="&lt;b&gt;Relationships&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;fontColor=#E67E22;" vertex="1" parent="1">
+          <mxGeometry x="640" y="370" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-row1" value="&lt;b&gt;N : 1&lt;/b&gt; &amp;nbsp;&amp;larr;&amp;nbsp; &lt;b&gt;Users&lt;/b&gt; &amp;mdash; rating.user (ref)&lt;br&gt;&lt;b&gt;N : 1&lt;/b&gt; &amp;nbsp;&amp;larr;&amp;nbsp; &lt;b&gt;Products&lt;/b&gt; &amp;mdash; rating.product (ref)&lt;br&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;lineHeight=18;" vertex="1" parent="1">
+          <mxGeometry x="640" y="398" width="460" height="60" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

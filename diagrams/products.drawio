@@ -1,0 +1,165 @@
+<mxfile host="Electron" agent="Draw.io" version="24.0.0" type="device">
+  <diagram id="products-module" name="Products">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#148F77;strokeColor=none;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="&lt;font style=&quot;font-size:20px;&quot; color=&quot;#FFFFFF&quot;&gt;PRODUCTS MODULE&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot; color=&quot;#A9DFBF&quot;&gt;Catalog &amp;middot; Pricing &amp;middot; Inventory &amp;middot; Media&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="300" y="25" width="600" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e-prod" value="&lt;b&gt;Product&lt;/b&gt;" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;fillColor=#1ABC9C;strokeColor=#148F77;fontColor=#FFFFFF;fontSize=13;rounded=1;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="400" height="451" as="geometry" />
+        </mxCell>
+        <mxCell id="p-row1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D5F5E3;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="30" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r1c1" value="&lt;font color=&quot;#148F77&quot;&gt;_id&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row1">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r1c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;ObjectId&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row1">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#E8F8F5;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="56" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r2c1" value="&lt;font color=&quot;#148F77&quot;&gt;name&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row2">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r2c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;String&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row2">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D5F5E3;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="82" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r3c1" value="&lt;font color=&quot;#148F77&quot;&gt;slug&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row3">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r3c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;String &amp;middot; unique&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row3">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#E8F8F5;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="108" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r4c1" value="&lt;font color=&quot;#148F77&quot;&gt;description&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row4">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r4c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;String&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row4">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D5F5E3;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="134" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r5c1" value="&lt;font color=&quot;#148F77&quot;&gt;price&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row5">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r5c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Number &amp;middot; min 0&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row5">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row6" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#E8F8F5;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="160" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r6c1" value="&lt;font color=&quot;#148F77&quot;&gt;discountPrice&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row6">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r6c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Number &amp;middot; optional&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row6">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row7" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D5F5E3;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="186" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r7c1" value="&lt;font color=&quot;#148F77&quot;&gt;stock&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row7">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r7c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Number &amp;middot; min 0&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row7">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row8" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#E8F8F5;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="212" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r8c1" value="&lt;font color=&quot;#148F77&quot;&gt;soldCount&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row8">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r8c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Number &amp;middot; computed&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row8">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row9" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D5F5E3;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="238" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r9c1" value="&lt;font color=&quot;#148F77&quot;&gt;brand (ref)&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row9">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r9c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;ObjectId &amp;rarr; Brands&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row9">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row10" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#E8F8F5;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="264" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r10c1" value="&lt;font color=&quot;#148F77&quot;&gt;category (ref)&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row10">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r10c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;ObjectId &amp;rarr; Categories&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row10">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row11" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D5F5E3;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="290" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r11c1" value="&lt;font color=&quot;#148F77&quot;&gt;images[]&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row11">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r11c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;[String] &amp;middot; multer&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row11">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row12" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#E8F8F5;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="316" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r12c1" value="&lt;font color=&quot;#148F77&quot;&gt;ratingStats&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row12">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r12c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;{avg, count} &amp;middot; computed&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row12">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row13" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D5F5E3;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="342" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r13c1" value="&lt;font color=&quot;#148F77&quot;&gt;isActive&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row13">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r13c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Boolean &amp;middot; default true&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row13">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-row14" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#E8F8F5;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-prod">
+          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="368" as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="p-r14c1" value="&lt;font color=&quot;#148F77&quot;&gt;createdAt&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row14">
+          <mxGeometry width="200" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p-r14c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Date &amp;middot; auto&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="p-row14">
+          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="notes-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="640" y="120" width="440" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="notes-title" value="&lt;b&gt;Business Logic&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#1ABC9C;" vertex="1" parent="1">
+          <mxGeometry x="652" y="128" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="notes-body" value="&lt;div style=&quot;font-size:11px;line-height:1.6;color:#444;&quot;&gt;&lt;b&gt;&amp;bull; CRUD&lt;/b&gt;&amp;nbsp;with pagination &amp;amp; filtering&lt;br&gt;&lt;b&gt;&amp;bull; Filters&lt;/b&gt;&amp;nbsp;by brand / category / price range / rating&lt;br&gt;&lt;b&gt;&amp;bull; Search&lt;/b&gt;&amp;nbsp;by name / description&lt;br&gt;&lt;b&gt;&amp;bull; Image upload&lt;/b&gt;&amp;nbsp;via multer&lt;br&gt;&lt;b&gt;&amp;bull; Stock check&lt;/b&gt;&amp;nbsp;before order placement&lt;br&gt;&lt;b&gt;&amp;bull; Validation&lt;/b&gt;&amp;nbsp;express-validator in routes&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="652" y="155" width="400" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rel-title" value="&lt;b&gt;Relationships&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;fontColor=#1ABC9C;" vertex="1" parent="1">
+          <mxGeometry x="640" y="370" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-row1" value="&lt;b&gt;N : 1&lt;/b&gt; &amp;nbsp;&amp;larr;&amp;nbsp; &lt;b&gt;Brands&lt;/b&gt; &amp;mdash; product.brand (ref)&lt;br&gt;&lt;b&gt;N : 1&lt;/b&gt; &amp;nbsp;&amp;larr;&amp;nbsp; &lt;b&gt;Categories&lt;/b&gt; &amp;mdash; product.category (ref)&lt;br&gt;&lt;b&gt;1 : N&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Cart&lt;/b&gt; &amp;mdash; cart.items.product (ref)&lt;br&gt;&lt;b&gt;1 : N&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Orders&lt;/b&gt; &amp;mdash; order.items.product (ref)&lt;br&gt;&lt;b&gt;1 : N&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Ratings&lt;/b&gt; &amp;mdash; ratings.product (ref)&lt;br&gt;&lt;b&gt;1 : N&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Reviews&lt;/b&gt; &amp;mdash; reviews.product (ref)&lt;br&gt;&lt;b&gt;N : N&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Wishlist&lt;/b&gt; &amp;mdash; wishlist.products[] (ref)&lt;br&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;lineHeight=18;" vertex="1" parent="1">
+          <mxGeometry x="640" y="398" width="460" height="130" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
