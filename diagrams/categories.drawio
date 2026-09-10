@@ -1,81 +1,183 @@
-<mxfile host="Electron" agent="Draw.io" version="24.0.0" type="device">
-  <diagram id="categories-module" name="Categories">
-    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0" background="#FFFFFF">
+<mxfile host="app.diagrams.net" agent="24.7.17">
+  <diagram id="categories-module" name="Categories Module">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
-        <mxCell id="title-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#239B56;strokeColor=none;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="40" y="20" width="1120" height="55" as="geometry" />
+        <!-- Title Bar -->
+        <mxCell id="title-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#239B56;strokeColor=#1A7F44;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1120" height="64" as="geometry" />
         </mxCell>
-        <mxCell id="title" value="&lt;font style=&quot;font-size:20px;&quot; color=&quot;#FFFFFF&quot;&gt;CATEGORIES MODULE&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px;&quot; color=&quot;#A9DFBF&quot;&gt;Product Categories &amp;middot; Hierarchical &amp;middot; Self-Referencing&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="300" y="25" width="600" height="45" as="geometry" />
-        </mxCell>
-
-        <mxCell id="e-cat" value="&lt;b&gt;Category&lt;/b&gt;" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;fillColor=#2ECC71;strokeColor=#1E8449;fontColor=#FFFFFF;fontSize=13;rounded=1;arcSize=8;shadow=1;" vertex="1" parent="1">
-          <mxGeometry x="100" y="120" width="400" height="187" as="geometry" />
-        </mxCell>
-        <mxCell id="ct-row1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D5F5E3;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-cat">
-          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="30" as="offset" /></mxGeometry>
-        </mxCell>
-        <mxCell id="ct-r1c1" value="&lt;font color=&quot;#1E8449&quot;&gt;_id&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="ct-row1">
-          <mxGeometry width="200" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="ct-r1c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;ObjectId&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="ct-row1">
-          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
-        </mxCell>
-        <mxCell id="ct-row2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#E8F8F5;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-cat">
-          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="56" as="offset" /></mxGeometry>
-        </mxCell>
-        <mxCell id="ct-r2c1" value="&lt;font color=&quot;#1E8449&quot;&gt;name&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="ct-row2">
-          <mxGeometry width="200" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="ct-r2c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;String &amp;middot; unique&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="ct-row2">
-          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
-        </mxCell>
-        <mxCell id="ct-row3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D5F5E3;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-cat">
-          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="82" as="offset" /></mxGeometry>
-        </mxCell>
-        <mxCell id="ct-r3c1" value="&lt;font color=&quot;#1E8449&quot;&gt;slug&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="ct-row3">
-          <mxGeometry width="200" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="ct-r3c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;String &amp;middot; unique&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="ct-row3">
-          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
-        </mxCell>
-        <mxCell id="ct-row4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#E8F8F5;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-cat">
-          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="108" as="offset" /></mxGeometry>
-        </mxCell>
-        <mxCell id="ct-r4c1" value="&lt;font color=&quot;#1E8449&quot;&gt;parent (ref)&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="ct-row4">
-          <mxGeometry width="200" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="ct-r4c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;ObjectId &amp;rarr; Category (self)&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="ct-row4">
-          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
-        </mxCell>
-        <mxCell id="ct-row5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=#D5F5E3;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;top=0;left=0;right=0;bottom=0;" vertex="1" parent="e-cat">
-          <mxGeometry width="400" height="26" as="geometry"><mxPoint y="134" as="offset" /></mxGeometry>
-        </mxCell>
-        <mxCell id="ct-r5c1" value="&lt;font color=&quot;#1E8449&quot;&gt;createdAt&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;fontSize=11;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="ct-row5">
-          <mxGeometry width="200" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="ct-r5c2" value="&lt;font color=&quot;#8E44AD&quot;&gt;Date &amp;middot; auto&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=right;verticalAlign=top;spacingRight=8;fontSize=10;fontFamily=Courier New;overflow=hidden;" vertex="1" parent="ct-row5">
-          <mxGeometry width="200" height="26" as="geometry"><mxPoint x="200" as="offset" /></mxGeometry>
+        <mxCell id="title-text" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;&lt;b&gt;Categories Module&lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;Product Categorization &amp;amp; Hierarchy Management&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="60" y="30" width="460" height="46" as="geometry" />
         </mxCell>
 
-        <mxCell id="notes-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#DEE2E6;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="640" y="120" width="440" height="200" as="geometry" />
+        <!-- Model / Entity Table -->
+        <mxCell id="model-header" value="&lt;b style=&quot;font-size: 13px;&quot;&gt;MODEL / ENTITY&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#239B56;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="210" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="notes-title" value="&lt;b&gt;Business Logic&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#27AE60;" vertex="1" parent="1">
-          <mxGeometry x="652" y="128" width="140" height="20" as="geometry" />
+        <mxCell id="model-table" value="" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;fillColor=#FFFFFF;strokeColor=#CCCCCC;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="40" y="134" width="520" height="218" as="geometry" />
         </mxCell>
-        <mxCell id="notes-body" value="&lt;div style=&quot;font-size:11px;line-height:1.6;color:#444;&quot;&gt;&lt;b&gt;&amp;bull; Hierarchy&lt;/b&gt;&amp;nbsp;parent field enables tree structure&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;bull; Root categories have parent = null&lt;br&gt;&lt;b&gt;&amp;bull; CRUD&lt;/b&gt;&amp;nbsp;create / read / update / delete&lt;br&gt;&lt;b&gt;&amp;bull; Admin only&lt;/b&gt;&amp;nbsp;write operations&lt;br&gt;&lt;b&gt;&amp;bull; Validation&lt;/b&gt;&amp;nbsp;express-validator in routes&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="652" y="155" width="400" height="110" as="geometry" />
+        <!-- Table Header -->
+        <mxCell id="row-h" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=#239B56;fontSize=13;strokeColor=none;html=0;fontColor=#FFFFFF;fontStyle=1;fontFamily=Helvetica;" vertex="1" parent="model-table">
+          <mxGeometry y="0" width="520" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="row-h-f" value="Field" style="shape=tableCell;verticalAlign=middle;align=left;spacingLeft=8;whiteSpace=wrap;html=0;fontFamily=Helvetica;fontSize=13;fontStyle=1;fontColor=#FFFFFF;top=0;left=0;bottom=0;right=0;strokeColor=none;fillColor=none;" vertex="1" parent="row-h">
+          <mxGeometry width="180" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="row-h-t" value="Type" style="shape=tableCell;verticalAlign=middle;align=left;spacingLeft=8;whiteSpace=wrap;html=0;fontFamily=Helvetica;fontSize=13;fontStyle=1;fontColor=#FFFFFF;top=0;left=0;bottom=0;right=0;strokeColor=none;fillColor=none;" vertex="1" parent="row-h">
+          <mxGeometry x="180" width="340" height="34" as="geometry" />
+        </mxCell>
+        <!-- Row 1 -->
+        <mxCell id="row1" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=#EAFAF1;strokeColor=#DDDDDD;html=0;fontFamily=Courier New;" vertex="1" parent="model-table">
+          <mxGeometry y="34" width="520" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="r1-f" value="&amp;_id" style="shape=tableCell;verticalAlign=middle;align=left;spacingLeft=8;whiteSpace=wrap;html=0;fontFamily=Courier New;fontSize=11;fontStyle=0;top=0;left=0;bottom=0;right=0;strokeColor=none;fillColor=none;" vertex="1" parent="row1">
+          <mxGeometry width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="r1-t" value="ObjectId" style="shape=tableCell;verticalAlign=middle;align=left;spacingLeft=8;whiteSpace=wrap;html=0;fontFamily=Courier New;fontSize=10;fontColor=#777777;top=0;left=0;bottom=0;right=0;strokeColor=none;fillColor=none;" vertex="1" parent="row1">
+          <mxGeometry x="180" width="340" height="32" as="geometry" />
+        </mxCell>
+        <!-- Row 2 -->
+        <mxCell id="row2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=#FFFFFF;strokeColor=#DDDDDD;html=0;" vertex="1" parent="model-table">
+          <mxGeometry y="66" width="520" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="r2-f" value="name" style="shape=tableCell;verticalAlign=middle;align=left;spacingLeft=8;whiteSpace=wrap;html=0;fontFamily=Courier New;fontSize=11;top=0;left=0;bottom=0;right=0;strokeColor=none;fillColor=none;" vertex="1" parent="row2">
+          <mxGeometry width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="r2-t" value="String (unique)" style="shape=tableCell;verticalAlign=middle;align=left;spacingLeft=8;whiteSpace=wrap;html=0;fontFamily=Courier New;fontSize=10;fontColor=#777777;top=0;left=0;bottom=0;right=0;strokeColor=none;fillColor=none;" vertex="1" parent="row2">
+          <mxGeometry x="180" width="340" height="32" as="geometry" />
+        </mxCell>
+        <!-- Row 3 -->
+        <mxCell id="row3" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=#EAFAF1;strokeColor=#DDDDDD;html=0;" vertex="1" parent="model-table">
+          <mxGeometry y="98" width="520" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="r3-f" value="slug" style="shape=tableCell;verticalAlign=middle;align=left;spacingLeft=8;whiteSpace=wrap;html=0;fontFamily=Courier New;fontSize=11;top=0;left=0;bottom=0;right=0;strokeColor=none;fillColor=none;" vertex="1" parent="row3">
+          <mxGeometry width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="r3-t" value="String (unique)" style="shape=tableCell;verticalAlign=middle;align=left;spacingLeft=8;whiteSpace=wrap;html=0;fontFamily=Courier New;fontSize=10;fontColor=#777777;top=0;left=0;bottom=0;right=0;strokeColor=none;fillColor=none;" vertex="1" parent="row3">
+          <mxGeometry x="180" width="340" height="32" as="geometry" />
+        </mxCell>
+        <!-- Row 4 -->
+        <mxCell id="row4" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=#FFFFFF;strokeColor=#DDDDDD;html=0;" vertex="1" parent="model-table">
+          <mxGeometry y="130" width="520" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="r4-f" value="parent" style="shape=tableCell;verticalAlign=middle;align=left;spacingLeft=8;whiteSpace=wrap;html=0;fontFamily=Courier New;fontSize=11;top=0;left=0;bottom=0;right=0;strokeColor=none;fillColor=none;" vertex="1" parent="row4">
+          <mxGeometry width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="r4-t" value="ObjectId -&gt; Category (nullable)" style="shape=tableCell;verticalAlign=middle;align=left;spacingLeft=8;whiteSpace=wrap;html=0;fontFamily=Courier New;fontSize=10;fontColor=#777777;top=0;left=0;bottom=0;right=0;strokeColor=none;fillColor=none;" vertex="1" parent="row4">
+          <mxGeometry x="180" width="340" height="32" as="geometry" />
+        </mxCell>
+        <!-- Row 5 -->
+        <mxCell id="row5" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=#EAFAF1;strokeColor=#DDDDDD;html=0;" vertex="1" parent="model-table">
+          <mxGeometry y="162" width="520" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="r5-f" value="createdAt" style="shape=tableCell;verticalAlign=middle;align=left;spacingLeft=8;whiteSpace=wrap;html=0;fontFamily=Courier New;fontSize=11;top=0;left=0;bottom=0;right=0;strokeColor=none;fillColor=none;" vertex="1" parent="row5">
+          <mxGeometry width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="r5-t" value="Date (auto)" style="shape=tableCell;verticalAlign=middle;align=left;spacingLeft=8;whiteSpace=wrap;html=0;fontFamily=Courier New;fontSize=10;fontColor=#777777;top=0;left=0;bottom=0;right=0;strokeColor=none;fillColor=none;" vertex="1" parent="row5">
+          <mxGeometry x="180" width="340" height="32" as="geometry" />
         </mxCell>
 
-        <mxCell id="rel-title" value="&lt;b&gt;Relationships&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;fontColor=#27AE60;" vertex="1" parent="1">
-          <mxGeometry x="100" y="350" width="180" height="20" as="geometry" />
+        <!-- Module Structure -->
+        <mxCell id="struct-header" value="&lt;b style=&quot;font-size: 13px;&quot;&gt;MODULE STRUCTURE&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#239B56;" vertex="1" parent="1">
+          <mxGeometry x="590" y="100" width="210" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="rel-row1" value="&lt;b&gt;1 : N&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Products&lt;/b&gt; &amp;mdash; products.category (ref)&lt;br&gt;&lt;b&gt;N : 1&lt;/b&gt; &amp;nbsp;&amp;rarr;&amp;nbsp; &lt;b&gt;Category (self)&lt;/b&gt; &amp;mdash; category.parent (ref)&lt;br&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;lineHeight=18;" vertex="1" parent="1">
-          <mxGeometry x="100" y="380" width="480" height="60" as="geometry" />
+
+        <!-- Route Box -->
+        <mxCell id="route-box" value="&lt;b&gt;Route&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#239B56;strokeColor=#1A7F44;fontColor=#FFFFFF;fontSize=12;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="610" y="140" width="140" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="route-desc" value="&lt;font size=&quot;10&quot;&gt;GET / POST / PUT / DELETE&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=top;strokeColor=none;fillColor=none;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="610" y="186" width="140" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow 1 -->
+        <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#239B56;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="route-box" target="ctrl-box" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Controller Box -->
+        <mxCell id="ctrl-box" value="&lt;b&gt;Controller&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#239B56;strokeColor=#1A7F44;fontColor=#FFFFFF;fontSize=12;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="810" y="140" width="140" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="ctrl-desc" value="&lt;font size=&quot;10&quot;&gt;Request validation &amp;amp; dispatch&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=top;strokeColor=none;fillColor=none;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="810" y="186" width="140" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow 2 -->
+        <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#239B56;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="ctrl-box" target="svc-box" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Service Box -->
+        <mxCell id="svc-box" value="&lt;b&gt;Service&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#239B56;strokeColor=#1A7F44;fontColor=#FFFFFF;fontSize=12;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="810" y="230" width="140" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="svc-desc" value="&lt;font size=&quot;10&quot;&gt;Tree logic &amp;amp; CRUD ops&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=top;strokeColor=none;fillColor=none;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="810" y="276" width="140" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow 3 -->
+        <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#239B56;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="svc-box" target="model-box" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Model Box -->
+        <mxCell id="model-box" value="&lt;b&gt;Model&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#239B56;strokeColor=#1A7F44;fontColor=#FFFFFF;fontSize=12;arcSize=20;" vertex="1" parent="1">
+          <mxGeometry x="610" y="320" width="140" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="model-desc" value="&lt;font size=&quot;10&quot;&gt;Mongoose Schema / MongoDB&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=top;strokeColor=none;fillColor=none;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="610" y="366" width="140" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Business Logic Notes -->
+        <mxCell id="biz-header" value="&lt;b style=&quot;font-size: 13px;&quot;&gt;BUSINESS LOGIC&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#239B56;" vertex="1" parent="1">
+          <mxGeometry x="590" y="420" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="biz-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FFF4;strokeColor=#A3D9B1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="590" y="454" width="570" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="biz-text" value="&lt;div style=&quot;padding: 8px;&quot;&gt;&lt;ul style=&quot;margin: 0; padding-left: 18px;&quot;&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Hierarchical tree structure via &lt;b&gt;parent&lt;/b&gt; field&lt;/li&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Root categories have &lt;b&gt;parent = null&lt;/b&gt;&lt;/li&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Full CRUD operations; admin-only for create/update/delete&lt;/li&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Input validation via &lt;b&gt;express-validator&lt;/b&gt;&lt;/li&gt;&lt;li&gt;Unique constraints on &lt;b&gt;name&lt;/b&gt; and &lt;b&gt;slug&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;spacingTop=2;spacingLeft=4;whiteSpace=wrap;strokeColor=none;fillColor=none;fontSize=11;" vertex="1" parent="biz-box">
+          <mxGeometry x="0" y="0" width="570" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- Relationships -->
+        <mxCell id="rel-header" value="&lt;b style=&quot;font-size: 13px;&quot;&gt;RELATIONSHIPS&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#239B56;" vertex="1" parent="1">
+          <mxGeometry x="40" y="378" width="160" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Categories Central Box -->
+        <mxCell id="rel-categories" value="&lt;b&gt;Categories&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#239B56;strokeColor=#1A7F44;fontColor=#FFFFFF;fontSize=12;arcSize=15;" vertex="1" parent="1">
+          <mxGeometry x="200" y="460" width="160" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Products Box -->
+        <mxCell id="rel-products" value="&lt;b&gt;Products&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#239B56;fontColor=#239B56;fontSize=12;arcSize=15;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="50" y="460" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-prod-desc" value="1:N via category ref" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="50" y="506" width="120" height="18" as="geometry" />
+        </mxCell>
+
+        <!-- Self-Ref Box -->
+        <mxCell id="rel-self" value="&lt;b&gt;Category&lt;/b&gt;&lt;br&gt;&lt;font size=&quot;10&quot;&gt;(Self)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#239B56;fontColor=#239B56;fontSize=12;arcSize=15;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="460" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-self-desc" value="N:1 parent -&gt; _id" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="400" y="506" width="120" height="18" as="geometry" />
+        </mxCell>
+
+        <!-- Edge: Products -&gt; Categories -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#239B56;strokeWidth=2;endArrow=block;endFill=1;fontSize=10;fontColor=#666666;fontStyle=1;" edge="1" source="rel-products" target="rel-categories" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Edge: Categories -&gt; Self -->
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#239B56;strokeWidth=2;endArrow=block;endFill=1;endFill=0;startArrow=block;startFill=1;fontSize=10;fontColor=#666666;fontStyle=1;" edge="1" source="rel-categories" target="rel-self" parent="1">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
       </root>
