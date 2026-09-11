@@ -21,11 +21,11 @@ dotenv.config();
 
 const app: Express = express();
 const port = process.env.APP_PORT;
-
+// middlewares for cors, logging, and parsing JSON requests
 app.use(cors());
 app.use(morgan('dev'));
-app.use(express.json());
-
+app.use(express.json({ limit: '1mb' }));
+// application routes for different modules
 app.use('/api/v1/brands', brandsRouter);
 app.use('/api/v1/cart', cartRouter);
 app.use('/api/v1/categories', categoriesRouter);
@@ -37,8 +37,10 @@ app.use('/api/v1/ratings', ratingsRouter);
 app.use('/api/v1/reviews', reviewsRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/wishlist', wishlistRouter);
+// middlewares for request validation and error handling
 app.use(validateRequest);
 app.use(errorHandler);
+// connect to the database and start the server
 connectDB()
   .then(() => {
     app.listen(port, () => {
