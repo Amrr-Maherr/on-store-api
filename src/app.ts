@@ -14,6 +14,8 @@ import { ratingsRouter } from './modules/ratings/ratings.routes.js';
 import { reviewsRouter } from './modules/reviews/reviews.routes.js';
 import { usersRouter } from './modules/users/users.routes.js';
 import { wishlistRouter } from './modules/wishlist/wishlist.routes.js';
+import { validateRequest } from './middlewares/validateRequest.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 
 dotenv.config();
 
@@ -35,7 +37,8 @@ app.use('/api/v1/ratings', ratingsRouter);
 app.use('/api/v1/reviews', reviewsRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/wishlist', wishlistRouter);
-
+app.use(validateRequest)
+app.use(errorHandler);
 connectDB()
   .then(() => {
     app.listen(port, () => {
