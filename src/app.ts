@@ -1,5 +1,7 @@
 import express, { type Express } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import morgan from 'morgan';
 import connectDB from './config/db.js';
 import { brandsRouter } from './modules/brands/brands.routes.js';
 import { cartRouter } from './modules/cart/cart.routes.js';
@@ -17,6 +19,9 @@ dotenv.config();
 
 const app: Express = express();
 const port = process.env.APP_PORT;
+
+app.use(cors());
+app.use(morgan('dev'));
 
 app.use('/api/v1/brands', brandsRouter);
 app.use('/api/v1/cart', cartRouter);
