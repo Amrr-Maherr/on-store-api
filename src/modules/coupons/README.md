@@ -18,4 +18,4 @@ This module is responsible for managing coupons operations inside the applicatio
 - DELETE /api/v1/coupons/:id
 
 ## Diagram
-The module diagram file is stored in the same folder: [coupons.drawio](coupons.drawio)
+The module diagram file is stored in the project diagrams folder: [coupons.drawio](../../../diagrams/coupons/coupons.drawio)

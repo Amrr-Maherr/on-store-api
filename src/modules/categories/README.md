@@ -18,4 +18,4 @@ This module is responsible for managing categories operations inside the applica
 - DELETE /api/v1/categories/:id
 
 ## Diagram
-The module diagram file is stored in the same folder: [categories.drawio](categories.drawio)
+The module diagram file is stored in the project diagrams folder: [categories.drawio](../../../diagrams/categories/categories.drawio)

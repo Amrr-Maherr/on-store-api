@@ -18,4 +18,4 @@ This module is responsible for managing wishlist operations inside the applicati
 - DELETE /api/v1/wishlist/:id
 
 ## Diagram
-The module diagram file is stored in the same folder: [wishlist.drawio](wishlist.drawio)
+The module diagram file is stored in the project diagrams folder: [wishlist.drawio](../../../diagrams/wishlist/wishlist.drawio)

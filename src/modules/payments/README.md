@@ -18,4 +18,4 @@ This module is responsible for managing payments operations inside the applicati
 - DELETE /api/v1/payments/:id
 
 ## Diagram
-The module diagram file is stored in the same folder: [payments.drawio](payments.drawio)
+The module diagram file is stored in the project diagrams folder: [payments.drawio](../../../diagrams/payments/payments.drawio)

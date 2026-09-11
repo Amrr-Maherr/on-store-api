@@ -18,4 +18,4 @@ This module is responsible for managing brands operations inside the application
 - DELETE /api/v1/brands/:id
 
 ## Diagram
-The module diagram file is stored in the same folder: [brands.drawio](brands.drawio)
+The module diagram file is stored in the project diagrams folder: [brands.drawio](../../../diagrams/brands/brands.drawio)

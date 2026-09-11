@@ -18,4 +18,4 @@ This module is responsible for managing ratings operations inside the applicatio
 - DELETE /api/v1/ratings/:id
 
 ## Diagram
-The module diagram file is stored in the same folder: [ratings.drawio](ratings.drawio)
+The module diagram file is stored in the project diagrams folder: [ratings.drawio](../../../diagrams/ratings/ratings.drawio)

@@ -18,4 +18,4 @@ This module is responsible for managing reviews operations inside the applicatio
 - DELETE /api/v1/reviews/:id
 
 ## Diagram
-The module diagram file is stored in the same folder: [reviews.drawio](reviews.drawio)
+The module diagram file is stored in the project diagrams folder: [reviews.drawio](../../../diagrams/reviews/reviews.drawio)

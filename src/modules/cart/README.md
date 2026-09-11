@@ -18,4 +18,4 @@ This module is responsible for managing cart operations inside the application. 
 - DELETE /api/v1/cart/:id
 
 ## Diagram
-The module diagram file is stored in the same folder: [cart.drawio](cart.drawio)
+The module diagram file is stored in the project diagrams folder: [cart.drawio](../../../diagrams/cart/cart.drawio)

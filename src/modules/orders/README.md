@@ -18,4 +18,4 @@ This module is responsible for managing orders operations inside the application
 - DELETE /api/v1/orders/:id
 
 ## Diagram
-The module diagram file is stored in the same folder: [orders.drawio](orders.drawio)
+The module diagram file is stored in the project diagrams folder: [orders.drawio](../../../diagrams/orders/orders.drawio)

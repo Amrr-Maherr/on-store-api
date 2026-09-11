@@ -18,4 +18,4 @@ This module is responsible for managing users operations inside the application.
 - DELETE /api/v1/users/:id
 
 ## Diagram
-The module diagram file is stored in the same folder: [users.drawio](users.drawio)
+The module diagram file is stored in the project diagrams folder: [users.drawio](../../../diagrams/users/users.drawio)

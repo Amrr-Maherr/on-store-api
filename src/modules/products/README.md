@@ -18,4 +18,4 @@ This module is responsible for managing products operations inside the applicati
 - DELETE /api/v1/products/:id
 
 ## Diagram
-The module diagram file is stored in the same folder: [products.drawio](products.drawio)
+The module diagram file is stored in the project diagrams folder: [products.drawio](../../../diagrams/products/products.drawio)
