@@ -22,6 +22,7 @@ const port = process.env.APP_PORT;
 
 app.use(cors());
 app.use(morgan('dev'));
+app.use(express.json());
 
 app.use('/api/v1/brands', brandsRouter);
 app.use('/api/v1/cart', cartRouter);
