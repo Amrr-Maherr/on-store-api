@@ -66,6 +66,25 @@ export const updateBrand = async (req: Request, res: Response) => {
     },
   });
 };
+export const getBrand = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const brand = await Brand.findById(id);
+
+  if (!brand) {
+    return res.status(404).json({
+      status: 'failed',
+      message: 'Brand not found',
+    });
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      brand,
+    },
+  });
+};
 export const getBrands = async (req: Request, res: Response) => {
   const { page = 1, limit = 25, search } = req.query;
   const pageNumber = Number(page);

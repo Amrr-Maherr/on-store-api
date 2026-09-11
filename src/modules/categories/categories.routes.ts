@@ -3,6 +3,7 @@
 import {
   createCategory,
   getCategories,
+  getCategory,
   deleteCategory,
   updateCategory,
 } from './categories.controller.js';
@@ -16,6 +17,8 @@ import { validateRequest } from '../../middlewares/validateRequest.js';
 export const categoriesRouter: Router = Router();
 
 categoriesRouter.get('/', getCategories);
+
+categoriesRouter.get('/:id', validateCategoryId, validateRequest, getCategory);
 
 categoriesRouter.post('/', createCategoryValidation, validateRequest, createCategory);
 

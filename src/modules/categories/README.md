@@ -16,6 +16,7 @@ This module is responsible for managing categories operations inside the applica
 ## Routes
 
 - GET /api/v1/categories
+- GET /api/v1/categories/:id
 - POST /api/v1/categories
 - PATCH /api/v1/categories/:id
 - DELETE /api/v1/categories/:id

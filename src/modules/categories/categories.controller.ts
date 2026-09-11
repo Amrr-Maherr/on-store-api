@@ -66,6 +66,25 @@ export const updateCategory = async (req: Request, res: Response) => {
     },
   });
 };
+export const getCategory = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const category = await Category.findById(id);
+
+  if (!category) {
+    return res.status(404).json({
+      status: 'failed',
+      message: 'Category not found',
+    });
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      category,
+    },
+  });
+};
 export const getCategories = async (req: Request, res: Response) => {
   const { page = 1, limit = 25, search } = req.query;
   const pageNumber = Number(page);

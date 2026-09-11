@@ -16,6 +16,7 @@ This module is responsible for managing brands operations inside the application
 ## Routes
 
 - GET /api/v1/brands
+- GET /api/v1/brands/:id
 - POST /api/v1/brands
 - PATCH /api/v1/brands/:id
 - DELETE /api/v1/brands/:id
