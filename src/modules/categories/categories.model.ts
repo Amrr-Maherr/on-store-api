@@ -3,15 +3,20 @@
 const { Schema } = mongoose;
 
 const CategorySchema = new Schema(
-    {
-        name: { type: String, required: true, trim: true },
-        image: { type: String, required: true },
-        slug: { type: String, required: true, unique: true, trim: true },
+  {
+    name: { type: String, required: true, trim: true },
+    image: { type: String, required: true },
+    slug: { type: String, required: true, unique: true, trim: true },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
     },
-    {
-        timestamps: true,
-        versionKey: false,
-    }
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  }
 );
 
 const Category = mongoose.model('Category', CategorySchema);

@@ -37,7 +37,7 @@ app.use('/api/v1/ratings', ratingsRouter);
 app.use('/api/v1/reviews', reviewsRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/wishlist', wishlistRouter);
-app.use(validateRequest)
+app.use(validateRequest);
 app.use(errorHandler);
 connectDB()
   .then(() => {

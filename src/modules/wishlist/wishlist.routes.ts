@@ -1,18 +1,18 @@
-﻿import { Router } from "express";
+﻿import { Router } from 'express';
 
 import {
-    createWishlist,
-    getWishlists,
-    deleteWishlist,
-    updateWishlist,
-} from "./wishlist.controller.js";
+  createWishlist,
+  getWishlists,
+  deleteWishlist,
+  updateWishlist,
+} from './wishlist.controller.js';
 
 export const wishlistRouter: Router = Router();
 
-wishlistRouter.get("/", getWishlists);
+wishlistRouter.get('/', getWishlists);
 
-wishlistRouter.post("/", createWishlist);
+wishlistRouter.post('/', createWishlist);
 
-wishlistRouter.delete("/:id", deleteWishlist);
+wishlistRouter.delete('/:id', deleteWishlist);
 
-wishlistRouter.patch("/:id", updateWishlist);
+wishlistRouter.patch('/:id', updateWishlist);

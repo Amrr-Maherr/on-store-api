@@ -1,18 +1,13 @@
-﻿import { Router } from "express";
+﻿import { Router } from 'express';
 
-import {
-    createOrder,
-    getOrders,
-    deleteOrder,
-    updateOrder,
-} from "./orders.controller.js";
+import { createOrder, getOrders, deleteOrder, updateOrder } from './orders.controller.js';
 
 export const ordersRouter: Router = Router();
 
-ordersRouter.get("/", getOrders);
+ordersRouter.get('/', getOrders);
 
-ordersRouter.post("/", createOrder);
+ordersRouter.post('/', createOrder);
 
-ordersRouter.delete("/:id", deleteOrder);
+ordersRouter.delete('/:id', deleteOrder);
 
-ordersRouter.patch("/:id", updateOrder);
+ordersRouter.patch('/:id', updateOrder);

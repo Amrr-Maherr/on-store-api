@@ -1,18 +1,13 @@
-﻿import { Router } from "express";
+﻿import { Router } from 'express';
 
-import {
-    createCoupon,
-    getCoupons,
-    deleteCoupon,
-    updateCoupon,
-} from "./coupons.controller.js";
+import { createCoupon, getCoupons, deleteCoupon, updateCoupon } from './coupons.controller.js';
 
 export const couponsRouter: Router = Router();
 
-couponsRouter.get("/", getCoupons);
+couponsRouter.get('/', getCoupons);
 
-couponsRouter.post("/", createCoupon);
+couponsRouter.post('/', createCoupon);
 
-couponsRouter.delete("/:id", deleteCoupon);
+couponsRouter.delete('/:id', deleteCoupon);
 
-couponsRouter.patch("/:id", updateCoupon);
+couponsRouter.patch('/:id', updateCoupon);
