@@ -70,13 +70,7 @@ export const login = async (req: Request, res: Response) => {
 };
 export const logout = async (req: Request, res: Response) => {
     const authHeader = req.headers.authorization;
-    if (!authHeader) {
-        return res.status(401).json({
-            status: "error",
-            message: "Authorization header missing",
-        });
-    }
-    const token = authHeader.split(' ')[1];
+    const token = authHeader?.split(' ')[1];
     if (!token) {
         return res.status(401).json({
             status: "error",

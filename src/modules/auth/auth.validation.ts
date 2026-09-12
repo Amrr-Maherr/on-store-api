@@ -1,4 +1,4 @@
-import { body, param } from 'express-validator';
+import { body, param, header } from 'express-validator';
 
 export const registerValidation = [
     body('username').notEmpty().withMessage('Username is required'),
@@ -11,4 +11,10 @@ export const registerValidation = [
 export const loginValidation = [
     body('email').isEmail().withMessage('Valid email is required'),
     body('password').notEmpty().withMessage('Password is required'),
+];
+
+export const tokenValidation = [
+    header('authorization')
+        .notEmpty()
+        .withMessage('Authorization header is required'),
 ];
