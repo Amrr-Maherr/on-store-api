@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-09-12T00:00:00.000Z" agent="drawio" version="21.0.0" type="device">
+  <diagram id="auth-module" name="Auth Module">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Title Bar -->
+        <mxCell id="title1" value="&lt;div style='text-align:center;'&gt;&lt;b style='font-size:20px;'&gt;AUTH MODULE&lt;/b&gt;&lt;br&gt;&lt;span style='font-size:11px;'&gt;Register, Login &amp; Logout&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2471A3;strokeColor=none;fontColor=#ffffff;arcSize=0;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1200" height="50" as="geometry"/>
+        </mxCell>
+        
+        <!-- Endpoints Section -->
+        <mxCell id="endpoint_header" value="&lt;div style='text-align:center;'&gt;&lt;b&gt;Endpoints&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2471A3;fontColor=#ffffff;strokeColor=#1A5276;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="70" width="300" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="e1" value="&lt;div style='font-size:11px;'&gt;• POST /api/v1/auth/register&lt;br&gt;• POST /api/v1/auth/login&lt;br&gt;• POST /api/v1/auth/logout&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EBF5FB;strokeColor=#AED6F1;strokeWidth=1;align=left;spacingLeft=5;spacingRight=5;" vertex="1" parent="1">
+          <mxGeometry x="50" y="110" width="300" height="80" as="geometry"/>
+        </mxCell>
+        
+        <!-- Module Structure Section -->
+        <mxCell id="struct_header" value="&lt;div style='text-align:center;'&gt;&lt;b&gt;Module Structure&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2471A3;fontColor=#ffffff;strokeColor=#1A5276;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="70" width="350" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="route1" value="&lt;div style='text-align:center;'&gt;&lt;span style='font-size:12px;'&gt;Route&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:9px; color:#666;'&gt;express-validator&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D6EAF8;strokeColor=#2471A3;strokeWidth=2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="460" y="110" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="controller1" value="&lt;div style='text-align:center;'&gt;&lt;span style='font-size:12px;'&gt;Controller&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:9px; color:#666;'&gt;req / res&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D6EAF8;strokeColor=#2471A3;strokeWidth=2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="460" y="180" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="service1" value="&lt;div style='text-align:center;'&gt;&lt;span style='font-size:12px;'&gt;Service&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:9px; color:#666;'&gt;bcrypt, JWT, nodemailer&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D6EAF8;strokeColor=#2471A3;strokeWidth=2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="460" y="250" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="model1" value="&lt;div style='text-align:center;'&gt;&lt;span style='font-size:12px;'&gt;Model&lt;/span&gt;&lt;br&gt;&lt;span style='font-size:9px; color:#666;'&gt;Mongoose schema&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D6EAF8;strokeColor=#2471A3;strokeWidth=2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="460" y="320" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <!-- Connectors for Module Structure -->
+        <mxCell id="conn1" value="" style="endArrow=block;html=1;strokeWidth=2;strokeColor=#2471A3;rounded=1;orthogonalLoop=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" source="route1" target="controller1" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="conn2" value="" style="endArrow=block;html=1;strokeWidth=2;strokeColor=#2471A3;rounded=1;orthogonalLoop=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" source="controller1" target="service1" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="conn3" value="" style="endArrow=block;html=1;strokeWidth=2;strokeColor=#2471A3;rounded=1;orthogonalLoop=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" source="service1" target="model1" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Business Logic Section -->
+        <mxCell id="biz_header" value="&lt;div style='text-align:center;'&gt;&lt;b&gt;Business Logic&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2471A3;fontColor=#ffffff;strokeColor=#1A5276;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="70" width="350" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="biz1" value="&lt;div style='font-size:11px;'&gt;• Password hashing with bcrypt&lt;br&gt;• JWT token issued on register/login&lt;br&gt;• Token revoked on logout&lt;br&gt;• express-validator on all routes&lt;br&gt;• Relies on the User model (users module)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EBF5FB;strokeColor=#AED6F1;strokeWidth=1;align=left;spacingLeft=5;spacingRight=5;" vertex="1" parent="1">
+          <mxGeometry x="850" y="110" width="350" height="140" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

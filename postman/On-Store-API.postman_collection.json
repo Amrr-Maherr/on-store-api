@@ -1,0 +1,666 @@
+{
+  "info": {
+    "_postman_id": "2f0f26e6-b7a0-4c9b-91ba-0d37b9e1c55a",
+    "name": "On Store API",
+    "description": "Postman collection for the On Store API. Includes every currently implemented endpoint from the codebase under `src/modules/`.\n\nImplemented modules\n- **Auth** - `POST /auth/register` is implemented; `/auth/login` and `/auth/logout` are registered routes whose handlers are empty stubs (they do not respond yet).\n- **Categories** - full CRUD + get by id + pagination/search, with express-validator rules.\n- **Brands** - full CRUD + get by id + pagination/search, with express-validator rules.\n\nNot included\n- cart, coupons, orders, payments, products, ratings, reviews, users, wishlist are registered but their controllers are empty stubs (`() => {}`), so requests would never complete. They will be added once implemented.\n\nCurrent implementation notes (reflected in the requests)\n- No authentication middleware exists. `Register` issues a JWT (HS256, 1 minute expiry) but no endpoint verifies tokens yet.\n- `Register` reads `username` from the body while the User model defines a required `name` field, so the current `save()` fails at the database level (HTTP 500).\n- `Create Category` / `Create Brand` validation requires `owner`, but the controllers drop it and the models require it, so creation currently fails at the database level (HTTP 500).\n- List `search` is read from the query but only filters when it equals the literal string `\"string\"` (implementation bug); `page` and `limit` work.\n- Roles defined by the User model enum: `merchant`, `admin`.\n\nEnvironment variables\n- `baseUrl` defaults to `http://localhost:3000/api/v1` (matches `APP_PORT` in `.env`).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"sara_martinez\",\n  \"email\": \"sara.martinez@example.com\",\n  \"phoneNumber\": \"+1-555-0101\",\n  \"password\": \"superSecret123\",\n  \"role\": \"merchant\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/auth/register",
+            "description": "Implemented endpoint (`src/modules/auth/auth.controller.ts`).\n\nBody fields read by the controller: `username`, `email`, `phoneNumber`, `password`, `role`.\n\n- User model (`auth.model.ts`) requires `name` (trimmed), `email` and `phoneNumber` (unique), `password` (min length 6), and `role` (enum `merchant` | `admin`, default `merchant`).\n- The controller hashes the password with bcrypt (12 rounds), signs a JWT with `TOKEN_SECRET` using HS256 with a 1 minute expiry, and returns `{ status, data: { newUser, token } }` with HTTP 201.\n- No validation chain is applied on this route and no authentication middleware exists yet, so the token is not verified by any endpoint.\n\nKnown issue: the controller passes `username` to the model, but the model field is `name` (required). `save()` therefore fails with a Mongoose validation error (HTTP 500) until the controller/model are aligned.\n\nThe test below saves the returned `token` into `accessToken` and the user id into `userId` when available.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Registration returns 201\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(201);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "",
+                  "if (json && json.data && json.data.newUser && json.data.newUser._id) {",
+                  "  pm.collectionVariables.set(\"userId\", json.data.newUser._id);",
+                  "}",
+                  "",
+                  "if (json && json.data && json.data.token) {",
+                  "  pm.collectionVariables.set(\"accessToken\", json.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"sara.martinez@example.com\",\n  \"password\": \"superSecret123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/auth/login",
+            "description": "Registered route (`src/modules/auth/auth.routes.ts`), but `login` in `auth.controller.ts` is an empty stub `() => {}` that sends no response. Expected body is illustrative only - login is not implemented yet."
+          },
+          "response": []
+        },
+        {
+          "name": "Logout User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/auth/logout",
+            "description": "Registered route (`src/modules/auth/auth.routes.ts`), but `logout` in `auth.controller.ts` is an empty stub `() => {}` that sends no response. Not implemented yet."
+          },
+          "response": []
+        }
+      ],
+      "description": "Authentication module. Only `register` is implemented."
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/categories",
+            "description": "Implemented (`src/modules/categories/categories.controller.ts` -> `getCategories`). Returns `{ status: 'success', results, data: { allCategories: [] } }` with HTTP 200. Accepts optional query parameters `page`, `limit`, `search`."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Categories (Pagination & Search)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/categories?page=1&limit=10&search=laptop",
+            "description": "Paginated list. `page` (default 1) and `limit` (default 25) are honored via `skip`/`limit`.\n\nNote: `search` is read from the query but the controller only applies the name filter when `search === 'string'` (implementation bug), so `search=laptop` currently returns unfiltered results."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Category By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/categories/{{categoryId}}",
+            "description": "Implemented (`getCategory`). Route applies `validateCategoryId` (id must be a valid MongoDB ObjectId). Returns `{ status: 'success', data: { category } }` with HTTP 200, or `{ status: 'failed', message: 'Category not found' }` with HTTP 404.\n\nThe test saves `data.category._id` into `categoryId`."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "",
+                  "if (json && json.data && json.data.category && json.data.category._id) {",
+                  "  pm.collectionVariables.set(\"categoryId\", json.data.category._id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Electronics\",\n  \"slug\": \"electronics\",\n  \"image\": \"https://images.example.com/categories/electronics.png\",\n  \"owner\": \"{{userId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/categories",
+            "description": "Implemented (`createCategory`). Route applies `createCategoryValidation` requiring non-empty `name`, `slug`, `image`, `owner`, then the shared `validateRequest` middleware.\n\nThe controller reads `name`, `slug`, `image` from the body and builds the document without `owner`. Because `owner` is required by the Category model, creation currently fails with a Mongoose validation error (HTTP 500) until the controller passes `owner`.\n\nThe test saves `data.newCategory._id` into `categoryId` when available.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(201);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "",
+                  "if (json && json.data && json.data.newCategory && json.data.newCategory._id) {",
+                  "  pm.collectionVariables.set(\"categoryId\", json.data.newCategory._id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Home & Kitchen\",\n  \"image\": \"https://images.example.com/categories/home-kitchen.png\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/categories/{{categoryId}}",
+            "description": "Implemented (`updateCategory`). Route applies `validateCategoryId` and `updateCategoryValidation` (optional `name`, `image`). Returns `{ status: 'success', data: { updatedCategory } }` with HTTP 200, or `{ status: 'failed', message: 'Category not found' }` with HTTP 404.\n\nThe test saves `data.updatedCategory._id` into `categoryId`.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "",
+                  "if (json && json.data && json.data.updatedCategory && json.data.updatedCategory._id) {",
+                  "  pm.collectionVariables.set(\"categoryId\", json.data.updatedCategory._id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/categories/{{categoryId}}",
+            "description": "Implemented (`deleteCategory`). Route applies `validateCategoryId`. Returns `{ status: 'success', message: 'Category deleted successfully' }` with HTTP 200, or `{ status: 'failed', message: 'Category not found' }` with HTTP 404.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Negative - Invalid Category ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/categories/invalid-id",
+            "description": "Negative test. `validateCategoryId` rejects values that are not valid MongoDB ObjectIds. Expect HTTP 400 with `{ status: 'fail', errors: [...] }`.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Invalid ID returns 400\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(400);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "pm.test(\"Response reports a validation failure\", function () {",
+                  "  pm.expect(json.status).to.eql(\"fail\");",
+                  "  pm.expect(json.errors).to.be.an(\"array\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Negative - Create Category Missing Required Field",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Electronics\",\n  \"slug\": \"electronics\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/categories",
+            "description": "Negative test. `createCategoryValidation` requires non-empty `name`, `slug`, `image`, `owner`. This body omits `image` and `owner` so the shared `validateRequest` middleware responds with HTTP 400 and `{ status: 'fail', errors: [...] }`.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Missing fields return 400\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(400);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "pm.test(\"Response reports a validation failure\", function () {",
+                  "  pm.expect(json.status).to.eql(\"fail\");",
+                  "  pm.expect(json.errors).to.be.an(\"array\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Negative - Category Not Found",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/categories/64f000000000000000000000",
+            "description": "Negative test. Uses a valid ObjectId that does not exist in the database. Expect HTTP 404 with `{ status: 'failed', message: 'Category not found' }`.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(404);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "pm.test(\"Response reports category not found\", function () {",
+                  "  pm.expect(json.message).to.include(\"not found\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Categories module - full CRUD + get by id + pagination with express-validator."
+    },
+    {
+      "name": "Brands",
+      "item": [
+        {
+          "name": "Get All Brands",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/brands",
+            "description": "Implemented (`src/modules/brands/brands.controller.ts` -> `getBrands`). Returns `{ status: 'success', results, data: { allBrands: [] } }` with HTTP 200. Accepts optional query parameters `page`, `limit`, `search`."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Brands (Pagination & Search)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/brands?page=1&limit=10&search=laptop",
+            "description": "Paginated list. `page` (default 1) and `limit` (default 25) are honored via `skip`/`limit`.\n\nNote: `search` is read from the query but the controller only applies the name filter when `search === 'string'` (implementation bug), so `search=laptop` currently returns unfiltered results."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Brand By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/brands/{{brandId}}",
+            "description": "Implemented (`getBrand`). Route applies `validateBrandId` (id must be a valid MongoDB ObjectId). Returns `{ status: 'success', data: { brand } }` with HTTP 200, or `{ status: 'failed', message: 'Brand not found' }` with HTTP 404.\n\nThe test saves `data.brand._id` into `brandId`."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "",
+                  "if (json && json.data && json.data.brand && json.data.brand._id) {",
+                  "  pm.collectionVariables.set(\"brandId\", json.data.brand._id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Brand",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"TechNova\",\n  \"slug\": \"technova\",\n  \"image\": \"https://images.example.com/brands/technova.png\",\n  \"owner\": \"{{userId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/brands",
+            "description": "Implemented (`createBrand`). Route applies `createBrandValidation` requiring non-empty `name`, `slug`, `image`, `owner`, then the shared `validateRequest` middleware.\n\nThe controller reads `name`, `slug`, `image` from the body and builds the document without `owner`. Because `owner` is required by the Brand model, creation currently fails with a Mongoose validation error (HTTP 500) until the controller passes `owner`.\n\nThe test saves `data.newBrand._id` into `brandId` when available.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(201);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "",
+                  "if (json && json.data && json.data.newBrand && json.data.newBrand._id) {",
+                  "  pm.collectionVariables.set(\"brandId\", json.data.newBrand._id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Brand",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Innovatech\",\n  \"image\": \"https://images.example.com/brands/innovatech.png\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/brands/{{brandId}}",
+            "description": "Implemented (`updateBrand`). Route applies `validateBrandId` and `updateBrandValidation` (optional `name`, `image`). Returns `{ status: 'success', data: { updatedBrand } }` with HTTP 200, or `{ status: 'failed', message: 'Brand not found' }` with HTTP 404.\n\nThe test saves `data.updatedBrand._id` into `brandId`.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "",
+                  "if (json && json.data && json.data.updatedBrand && json.data.updatedBrand._id) {",
+                  "  pm.collectionVariables.set(\"brandId\", json.data.updatedBrand._id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Brand",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/brands/{{brandId}}",
+            "description": "Implemented (`deleteBrand`). Route applies `validateBrandId`. Returns `{ status: 'success', message: 'Brand deleted successfully' }` with HTTP 200, or `{ status: 'failed', message: 'Brand not found' }` with HTTP 404.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(200);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Negative - Invalid Brand ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/brands/invalid-id",
+            "description": "Negative test. `validateBrandId` rejects values that are not valid MongoDB ObjectIds. Expect HTTP 400 with `{ status: 'fail', errors: [...] }`.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Invalid ID returns 400\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(400);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "pm.test(\"Response reports a validation failure\", function () {",
+                  "  pm.expect(json.status).to.eql(\"fail\");",
+                  "  pm.expect(json.errors).to.be.an(\"array\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Negative - Create Brand Missing Required Field",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"TechNova\",\n  \"slug\": \"technova\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/brands",
+            "description": "Negative test. `createBrandValidation` requires non-empty `name`, `slug`, `image`, `owner`. This body omits `image` and `owner` so the shared `validateRequest` middleware responds with HTTP 400 and `{ status: 'fail', errors: [...] }`.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Missing fields return 400\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(400);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "pm.test(\"Response reports a validation failure\", function () {",
+                  "  pm.expect(json.status).to.eql(\"fail\");",
+                  "  pm.expect(json.errors).to.be.an(\"array\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Negative - Brand Not Found",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/brands/64f000000000000000000000",
+            "description": "Negative test. Uses a valid ObjectId that does not exist in the database. Expect HTTP 404 with `{ status: 'failed', message: 'Brand not found' }`.",
+            "response": []
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {",
+                  "  pm.expect(pm.response.code).to.eql(404);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "pm.test(\"Response reports brand not found\", function () {",
+                  "  pm.expect(json.message).to.include(\"not found\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Brands module - full CRUD + get by id + pagination with express-validator."
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api/v1",
+      "type": "default"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "userId",
+      "value": "64b4f1c2e9a3b70001c2d3e4",
+      "type": "default"
+    },
+    {
+      "key": "categoryId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "brandId",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

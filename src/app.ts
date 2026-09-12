@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 import connectDB from './config/db.js';
+import { authRouter } from './modules/auth/auth.routes.js';
 import { brandsRouter } from './modules/brands/brands.routes.js';
 import { cartRouter } from './modules/cart/cart.routes.js';
 import { categoriesRouter } from './modules/categories/categories.routes.js';
@@ -26,6 +27,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json({ limit: '1mb' }));
 // application routes for different modules
+app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/brands', brandsRouter);
 app.use('/api/v1/cart', cartRouter);
 app.use('/api/v1/categories', categoriesRouter);
