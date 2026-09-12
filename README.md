@@ -1,112 +1,148 @@
 # On Store API
 
-A RESTful e-commerce backend API built with **Node.js, TypeScript, Express, and MongoDB (Mongoose)**.
+A RESTful e-commerce backend API built with **Node.js, TypeScript, Express 5, and MongoDB (Mongoose)**.
 
-The project follows a module-based architecture. As of the current implementation state, the **Categories** and **Brands** catalog modules are fully implemented, while the remaining e-commerce domain modules are scaffolded but not yet implemented.
+The project follows a module-based, layered architecture: every business domain lives in `src/modules/<name>/` with model, controller, service, validation, routes, and index files. As of the current implementation state, **Authentication**, **Categories**, and **Brands** are implemented, while the remaining e-commerce modules (products, cart, orders, payments, etc.) are scaffolded but not yet functional.
 
-> **Status note:** This README documents the project **as it currently exists**. Anything not yet implemented is explicitly labeled `Planned`.
+> **Status note:** This README documents the project **as it currently exists**. Anything not implemented is explicitly labeled. Planned features are never presented as completed.
 
 ---
 
 ## Table of Contents
 
-- [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
+- [Overview](#overview)
+- [Features](#features)
+- [User Roles](#user-roles)
+- [Application Architecture](#application-architecture)
 - [Project Structure](#project-structure)
-- [API Reference](#api-reference)
-- [Database Models](#database-models)
-- [Authentication & Authorization](#authentication--authorization)
-- [Validation & Error Handling](#validation--error-handling)
-- [Configuration](#configuration)
-- [Getting Started](#getting-started)
-- [Current Progress](#current-progress)
-- [Roadmap](#roadmap)
-- [Development Conventions](#development-conventions)
-- [Documentation](#documentation)
-- [License](#license)
+- [Technology Stack](#technology-stack)
+- [Backend](#backend)
+- [API](#api)
+- [Database](#database)
+- [Frontend](#frontend)
+- [Authentication & Security](#authentication--security)
+- [Environment Variables](#environment-variables)
+- [Installation](#installation)
+- [Available Scripts](#available-scripts)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Current Project Status](#current-project-status)
+- [Limitations](#limitations)
+- [Future Improvements](#future-improvements)
+- [Development Notes](#development-notes)
+- [Conclusion](#conclusion)
 
 ---
 
-## Tech Stack
+## Overview
 
-Technologies actually used in the codebase:
+### What it is
 
-| Technology        | Version           | Usage                                                    |
-| ----------------- | ----------------- | -------------------------------------------------------- |
-| Node.js           | —                 | Runtime, ES Modules (`"type": "module"`)                 |
-| Express           | ^5.2.1            | HTTP framework (Express 5)                               |
-| TypeScript        | ^5.9.3            | Strict mode, `NodeNext` resolution, compiled to `./dist` |
-| MongoDB           | ^7.6.0            | Database driver dependency                               |
-| Mongoose          | ^9.9.4            | ODM — schema/models, queries                             |
-| express-validator | ^7.3.2            | Request validation                                       |
-| cors              | ^2.8.6            | Cross-origin requests                                    |
-| morgan            | ^1.12.1           | HTTP request logging                                     |
-| dotenv            | ^17.4.2           | Environment variables                                    |
-| nodemon + tsx     | ^3.1.0 / ^4.23.13 | Development runner (TypeScript execution)                |
-| prettier          | ^3.9.6            | Code formatting                                          |
+`on-store-api` is the backend REST API for an e-commerce application. It exposes JSON endpoints under the `/api/v1` prefix and stores data in MongoDB.
 
-Installed dependencies that are **not used in the code yet** (planned usage):
+### Main purpose
 
-- `bcrypt` — no usage found
-- `multer` — no usage found
-- `nodemailer` — no usage found
-- `jest`, `ts-jest`, `supertest` — no tests exist yet
+Provide the server-side foundation for a store: user accounts and authentication, plus catalog management (categories and brands). A set of additional commerce modules — products, cart, coupons, orders, payments, ratings, reviews, wishlist — is prepared as module skeletons for later implementation.
+
+### Target users
+
+- **Developers** integrating the API (no frontend ships in this repository).
+- **Merchants and admins** — the two roles defined by the registration flow — once role-based access control is implemented.
+
+### Main workflow today
+
+1. A user registers (`POST /auth/register`) or logs in (`POST /auth/login`) and receives a JWT.
+2. A client calls the public catalog endpoints for categories and brands.
+3. All other commerce flows (browse products, cart, order, pay) are scaffolded only.
+
+### Current scope
+
+- Implemented: authentication (register/login/logout), categories CRUD, brands CRUD.
+- Registered but non-functional: users, products, cart, coupons, orders, payments, ratings, reviews, wishlist (empty controller stubs; requests never receive a response).
+- No tests, no deployment configuration, no frontend.
 
 ---
 
-## Architecture
+## Features
 
-### Request flow
+### Authentication & Authorization
 
-The implemented request flow for the working modules:
+- **Register** — creates a user with `username`, `email`, `phoneNumber`, `password`, `role`; hashes the password with bcrypt (12 rounds); returns the user plus a JWT.
+- **Login** — looks up the user by email, compares the password with bcrypt, and returns the user plus a JWT.
+- **Logout** — requires an `Authorization` header and confirms logout (no token is revoked or blacklisted).
+- Validation rules are declared on all three endpoints, but auth routes do not run the `validateRequest` middleware inline (see [Limitations](#limitations)).
+- **Not implemented:** JWT verification middleware, protected routes, and role-based access control. Tokens are issued but never checked by any endpoint.
+
+### Categories
+
+- Create, list (paginated), get by id, update, delete.
+- Validation: create requires `name`, `slug`, `image`, `owner`; update allows optional `name` and `image`; `:id` must be a valid MongoDB ObjectId.
+
+### Brands
+
+- Create, list (paginated), get by id, update, delete.
+- Validation mirrors the Categories module.
+
+### Scaffolded modules (not implemented)
+
+Routes are registered and controller stubs exist (`() => {}`), but models, services, and validations are empty and no response is ever sent:
+
+`users`, `products`, `cart`, `coupons`, `orders`, `payments`, `ratings`, `reviews`, `wishlist`.
+
+---
+
+## User Roles
+
+Two roles are defined by the registration validation and the `User` schema enum. **No authorization logic currently distinguishes them** — roles are stored on the user document and embedded in the JWT payload, but nothing is enforced server-side.
+
+| Role     | Defined in                          | Can do today                         | Notes                                      |
+| -------- | ----------------------------------- | ------------------------------------ | ------------------------------------------ |
+| Merchant | `auth.model.ts` enum, default role  | Register / login; call any endpoint  | Intended as the content-owner role         |
+| Admin    | `auth.model.ts` enum                | Register / login; call any endpoint  | No elevated permissions implemented yet    |
+
+Because no route is protected, endpoint access is currently identical for both roles (and for unauthenticated clients).
+
+---
+
+## Application Architecture
+
+### High-level
+
+The application is a **modular monolith**:
 
 ```text
 Request
   ↓
-Routes (module router)
+Global middleware (cors, morgan, express.json)
   ↓
-Validation (express-validator rules)
+Module router mounted at /api/v1/<module>
+  ↓
+Route-level validation rules (express-validator)
   ↓
 validateRequest middleware
   ↓
-Controller
+Controller (business logic + response building)
   ↓
-Mongoose Model
+Mongoose model
   ↓
 MongoDB
 ```
 
-Notes on the current implementation:
-
-- The **service layer is present as a file convention only** — all `*.service.ts` files are empty. Controllers currently access Mongoose models directly.
-- Controllers perform database operations (`create`, `findById`, `findByIdAndUpdate`, `findByIdAndDelete`) and build the HTTP response.
-- Validation rules are applied at the route level, followed by the shared `validateRequest` middleware.
-
 ### Middleware chain (in `src/app.ts`)
 
-1. `cors()` — enables cross-origin requests
-2. `morgan('dev')` — request logging
-3. `express.json({ limit: '1mb' })` — JSON body parsing with a 1 MB size cap
-4. Module routers mounted under `/api/v1/*`
-5. `validateRequest` — validates the current request
-6. `errorHandler` — centralized error responses
+1. `cors()` — permits cross-origin requests.
+2. `morgan('dev')` — HTTP request logging.
+3. `express.json({ limit: '1mb' })` — JSON body parsing with a 1 MB cap.
+4. Module routers mounted under `/api/v1/*`.
+5. `validateRequest` — global check of collected validation results.
+6. `errorHandler` — centralized error responses.
 
-### Module layout
+### Layering and design patterns
 
-Every module is self-contained under `src/modules/<name>/` with the same file convention:
-
-```text
-<name>/
-├── <name>.controller.ts
-├── <name>.model.ts
-├── <name>.routes.ts
-├── <name>.service.ts
-├── <name>.validation.ts
-├── index.ts
-└── README.md
-```
-
-Each module's `index.ts` re-exports controller, model, service, validation, and routes.
+- **Module-based organization** — each domain is self-contained under `src/modules/<name>/`.
+- **Route → validation → controller → model** flow. Validation rules are declared in per-module `*.validation.ts` files and executed through the shared `validateRequest` middleware.
+- **Service layer is a convention only** — `*.service.ts` files exist in every module but are empty. Controllers query Mongoose models directly.
+- Express `Router` per module; controllers are plain `async` handlers that build responses inline.
 
 ---
 
@@ -114,89 +150,169 @@ Each module's `index.ts` re-exports controller, model, service, validation, and 
 
 ```text
 .
-├── .env                         # environment variables (gitignored)
+├── .env                         # environment variables (gitignored; no .env.example)
 ├── .gitignore
 ├── package.json
 ├── tsconfig.json
 ├── diagrams/                    # architecture diagrams (.drawio)
-│   ├── E-commerc Diagram.drawio # overall system architecture (target design)
+│   ├── E-commerc Diagram.drawio # overall target architecture
 │   └── <module>/<module>.drawio # per-module diagrams
+├── postman/
+│   └── On-Store-API.postman_collection.json  # Postman collection
 └── src/
-    ├── app.ts                   # entry point — middleware + route registration
-    ├── .prettierrc              # Prettier configuration
+    ├── app.ts                   # entry point — middleware chain + route registration
+    ├── .prettierrc              # Prettier config
     ├── config/
-    │   └── db.ts                # MongoDB connection (mongoose)
+    │   └── db.ts                # Mongoose connection (APP_URL)
     ├── middlewares/
-    │   ├── validateRequest.ts   # validation result middleware
-    │   ├── errorHandler.ts      # centralized error handler
-    │   └── notFound.ts          # empty (not yet implemented)
-    ├── modules/
-    │   ├── brands/              # implemented
-    │   ├── categories/          # implemented
-    │   ├── cart/                # skeleton
-    │   ├── coupons/             # skeleton
-    │   ├── orders/              # skeleton
-    │   ├── payments/            # skeleton
-    │   ├── products/            # skeleton
-    │   ├── ratings/             # skeleton
-    │   ├── reviews/             # skeleton
-    │   ├── users/               # skeleton
-    │   └── wishlist/            # skeleton
-    └── utils/                   # empty
+    │   ├── validateRequest.ts   # validation-result middleware (implemented)
+    │   ├── errorHandler.ts      # centralized error handler (implemented)
+    │   └── notFound.ts          # empty — no 404 handler registered
+    └── modules/
+        ├── auth/                # implemented — register, login, logout + User model
+        ├── categories/          # implemented — CRUD + get by id + pagination
+        ├── brands/              # implemented — CRUD + get by id + pagination
+        └── users|products|cart|coupons|orders|payments|ratings|reviews|wishlist/
+                                 # scaffolded — routes + empty controller stubs,
+                                 #   empty model/service/validation files
+```
+
+Each module (except the entry point) follows the same convention:
+
+```text
+<name>/
+├── <name>.controller.ts   # HTTP handlers
+├── <name>.model.ts        # Mongoose schema/model
+├── <name>.routes.ts       # Express router
+├── <name>.service.ts      # empty (planned service layer)
+├── <name>.validation.ts   # express-validator rules
+├── index.ts               # barrel re-exports
+└── README.md              # module documentation
 ```
 
 ---
 
-## API Reference
+## Technology Stack
 
-All routes are mounted under the `/api/v1` prefix.
+| Technology        | Version      | Purpose                                            |
+| ----------------- | ------------ | -------------------------------------------------- |
+| Node.js           | —            | Runtime (ES Modules, `"type": "module"`)           |
+| Express           | ^5.2.1       | HTTP framework                                    |
+| TypeScript        | ^5.9.3       | Language, strict mode, `NodeNext` resolution       |
+| Mongoose          | ^9.9.4       | ODM — schemas, models, queries                     |
+| MongoDB driver    | ^7.6.0       | Database driver (`mongodb` dependency)             |
+| express-validator | ^7.3.2       | Request validation                                 |
+| bcrypt            | ^6.0.0       | Password hashing (12 rounds)                       |
+| jsonwebtoken      | ^9.0.3       | JWT signing (HS256)                                |
+| cors              | ^2.8.6       | Cross-origin request handling                       |
+| morgan            | ^1.12.1      | HTTP request logging                               |
+| dotenv            | ^17.4.2      | Environment variable loading                        |
+| nodemon + tsx     | ^3.1.0 / ^4.23.13 | Development runner (TypeScript hot reload)    |
+| prettier          | ^3.9.6       | Code formatting (`npm run format`)                 |
+
+Installed but **not used in the code**:
+
+- `multer` — no file upload code.
+- `nodemailer` — no email code.
+- `jest`, `ts-jest`, `supertest`, `ts-node` — no tests or test script exist.
+
+---
+
+## Backend
+
+### Framework
+
+Express 5 with TypeScript, compiled via `tsc` to `./dist`, run with `tsx`/`nodemon` in development. TypeScript strict mode, ESM, `NodeNext` module resolution.
+
+### Module structure
+
+Every domain is a self-contained package under `src/modules/<name>/` (controller, model, routes, validation, empty service, barrel `index.ts`) and is mounted in `src/app.ts` as an Express router.
+
+### Controllers
+
+Plain async Express handlers that perform database operations and build JSON responses inline. Implemented controllers are in the `auth`, `categories`, and `brands` modules. In create/list/get/update/delete flows, controllers call Mongoose directly (e.g., `Category.create`, `Brand.findById`, `findByIdAndUpdate`).
+
+### Routes
+
+Routers register REST-style endpoints. Implemented modules apply their validation rules at the route level and then `validateRequest`. Validation is defined per module in `*.validation.ts`.
+
+### Middleware
+
+- `validateRequest` (`src/middlewares/validateRequest.ts`) — reads `validationResult(req)`; on failure responds `400` with `{ "status": "fail", "errors": [...] }`.
+- `errorHandler` (`src/middlewares/errorHandler.ts`) — last middleware; responds with `err.statusCode` (default `500`) and `status: "error" | "fail"` depending on status code.
+- `notFound.ts` — empty; no 404 handler is registered (unknown routes fall through to Express's default 404).
+
+### Validation
+
+express-validator chains defined per route, e.g.:
+
+- `registerValidation` — `username` non-empty, `email` is email, `phoneNumber` non-empty, `password` ≥ 6 chars, `role` in `['merchant', 'admin']`.
+- `loginValidation` — `email` is email, `password` non-empty.
+- `tokenValidation` — `authorization` header present (used by logout).
+- Category/Brand create rules require non-empty `name`, `slug`, `image`, `owner`; ObjectId params validated with `isMongoId()`.
+
+**Enforcement note:** the `validateRequest` middleware is applied **inline** only on the category and brand routes. The auth routes attach their validation chains but register them alongside a global `app.use(validateRequest)` that runs *after* each route completes, so validation failures on auth endpoints are not short-circuited before the controller runs (see [Limitations](#limitations)).
+
+### Authentication
+
+JWT signing occurs in `register` and `login` (`jwt.sign` with `TOKEN_SECRET`, algorithm `HS256`, `expiresIn: '1m'`). There is **no authentication middleware** — tokens are never verified (`jwt.verify` is not used anywhere) and no route is protected.
+
+### Error handling
+
+Errors are delegated to the shared `errorHandler`. Controllers also return explicit 4xx responses (e.g., `404 "Category not found"`, `401 "Invalid password"`, `404 "User not found"`). Mongoose-level failures (e.g., validation errors from the model) currently surface as HTTP 500 responses.
+
+### Database integration
+
+`src/config/db.ts` connects via Mongoose to `APP_URL`, throwing if the variable is missing. The server starts listening only after a successful connection.
+
+---
+
+## API
+
+All routes are mounted under the `/api/v1` prefix. **No route currently requires authentication** — every endpoint is effectively public.
 
 ### Implemented endpoints
 
-The **Categories** and **Brands** modules implement the same REST pattern (list, get by id, create, update, delete).
+#### Auth
 
-| Method | Endpoint                 | Description                  | Validation applied                                |
-| ------ | ------------------------ | ---------------------------- | ------------------------------------------------- |
-| GET    | `/api/v1/categories`     | Paginated list of categories | —                                                 |
-| GET    | `/api/v1/categories/:id` | Get a single category by id  | `validateCategoryId`                              |
-| POST   | `/api/v1/categories`     | Create a category            | `createCategoryValidation`                        |
-| PATCH  | `/api/v1/categories/:id` | Update a category            | `validateCategoryId` + `updateCategoryValidation` |
-| DELETE | `/api/v1/categories/:id` | Delete a category            | `validateCategoryId`                              |
-| GET    | `/api/v1/brands`         | Paginated list of brands     | —                                                 |
-| GET    | `/api/v1/brands/:id`     | Get a single brand by id     | `validateBrandId`                                 |
-| POST   | `/api/v1/brands`         | Create a brand               | `createBrandValidation`                           |
-| PATCH  | `/api/v1/brands/:id`     | Update a brand               | `validateBrandId` + `updateBrandValidation`       |
-| DELETE | `/api/v1/brands/:id`     | Delete a brand               | `validateBrandId`                                 |
+| Method | Endpoint               | Purpose                               | Response shape                                   |
+| ------ | ---------------------- | -------------------------------------- | ------------------------------------------------ |
+| POST   | `/api/v1/auth/register` | Create a user, issue a JWT             | `201` `{ status, data: { newUser, token } }`     |
+| POST   | `/api/v1/auth/login`    | Authenticate, issue a JWT              | `200` `{ status, data: { user, token } }`        |
+| POST   | `/api/v1/auth/logout`   | Require a bearer token, confirm logout | `200` `{ status, message }`                      |
 
-Each route that validates uses the shared `validateRequest` middleware after the validation rules.
+Login errors: `404 { status: "error", message: "User not found" }` and `401 { status: "error", message: "Invalid password" }`.
 
-#### List query parameters
+#### Categories & Brands
 
-`GET /api/v1/categories` and `GET /api/v1/brands` support:
+Both modules implement the same REST pattern.
 
-- `page` — page number (defaults to `1`)
-- `limit` — results per page (defaults to `25`)
-- `search` — a name search filter is defined in the controller
+| Method | Endpoint             | Description                 | Validation applied                                |
+| ------ | -------------------- | --------------------------- | ------------------------------------------------- |
+| GET    | `/api/v1/categories` | Paginated list              | —                                                 |
+| GET    | `/api/v1/categories/:id` | Single category by id   | `validateCategoryId`                              |
+| POST   | `/api/v1/categories` | Create a category           | `createCategoryValidation` + `validateRequest`    |
+| PATCH  | `/api/v1/categories/:id` | Update a category       | `validateCategoryId` + `updateCategoryValidation` |
+| DELETE | `/api/v1/categories/:id` | Delete a category       | `validateCategoryId`                              |
+| GET    | `/api/v1/brands`      | Paginated list              | —                                                 |
+| GET    | `/api/v1/brands/:id`  | Single brand by id          | `validateBrandId`                                 |
+| POST   | `/api/v1/brands`      | Create a brand              | `createBrandValidation` + `validateRequest`       |
+| PATCH  | `/api/v1/brands/:id`  | Update a brand              | `validateBrandId` + `updateBrandValidation`       |
+| DELETE | `/api/v1/brands/:id`  | Delete a brand              | `validateBrandId`                                 |
 
-> **Note:** the `search` filter is currently non-functional because the controller checks `search === 'string'` instead of a type check. Pagination works; search/name-filtering does not yet apply.
+List query parameters:
 
-#### Validation contracts
+- `page` — page number (default `1`)
+- `limit` — results per page (default `25`)
+- `search` — intended name filter, **currently non-functional** (see [Limitations](#limitations))
 
-**Create** requires `name`, `slug`, `image`, `owner` (all non-empty). **Update** allows optional `name` and `image`. The `:id` parameter must be a valid MongoDB ObjectId.
-
-> **Note:** the create controller reads `name`, `slug`, and `image` from the request body but does not pass `owner` to the model, although `owner` is required by the schema. As a result, create requests currently fail at the database level.
-
-#### Response shapes (verified from controller code)
+Response shapes (verified from controller code):
 
 ```jsonc
-// 200 GET list
-{
-  "status": "success",
-  "results": 1,
-  "data": { "allCategories": [] }
-}
+// 200 list
+{ "status": "success", "results": 1, "data": { "allCategories": [] } }
 
-// 200 GET one / PATCH update
+// 200 get one / patch update
 { "status": "success", "data": { "category": {} } }
 
 // 201 create
@@ -205,254 +321,273 @@ Each route that validates uses the shared `validateRequest` middleware after the
 // 200 delete
 { "status": "success", "message": "Category deleted successfully" }
 
-// 404 not found
+// 404 missing document
 { "status": "failed", "message": "Category not found" }
 
-// 400 validation error (from validateRequest)
+// 400 validation failure (validateRequest)
 { "status": "fail", "errors": [] }
 ```
 
----
+### Registered but non-functional endpoints
 
-### Skeleton endpoints (registered but not implemented)
+The following modules register routes that delegate to **empty controller stubs** (`() => {}`). Models, services, and validations are empty, and no response is ever sent — requests to these endpoints hang until the handlers are implemented.
 
-The following modules register routes that delegate to **empty controller handlers**. No model, service, or validation exists, and no response is returned, so requests to these endpoints do not complete.
-
-| Module   | Registered routes (no implementation)                            |
-| -------- | ---------------------------------------------------------------- |
-| cart     | `GET/POST /api/v1/cart`, `PATCH/DELETE /api/v1/cart/:id`         |
-| coupons  | `GET/POST /api/v1/coupons`, `PATCH/DELETE /api/v1/coupons/:id`   |
-| orders   | `GET/POST /api/v1/orders`, `PATCH/DELETE /api/v1/orders/:id`     |
-| payments | `GET/POST /api/v1/payments`, `PATCH/DELETE /api/v1/payments/:id` |
+| Module   | Registered routes |
+| -------- | ----------------- |
+| users    | `GET/POST /api/v1/users`, `PATCH/DELETE /api/v1/users/:id` |
 | products | `GET/POST /api/v1/products`, `PATCH/DELETE /api/v1/products/:id` |
-| ratings  | `GET/POST /api/v1/ratings`, `PATCH/DELETE /api/v1/ratings/:id`   |
-| reviews  | `GET/POST /api/v1/reviews`, `PATCH/DELETE /api/v1/reviews/:id`   |
-| users    | `GET/POST /api/v1/users`, `PATCH/DELETE /api/v1/users/:id`       |
+| cart     | `GET/POST /api/v1/cart`, `PATCH/DELETE /api/v1/cart/:id` |
+| coupons  | `GET/POST /api/v1/coupons`, `PATCH/DELETE /api/v1/coupons/:id` |
+| orders   | `GET/POST /api/v1/orders`, `PATCH/DELETE /api/v1/orders/:id` |
+| payments | `GET/POST /api/v1/payments`, `PATCH/DELETE /api/v1/payments/:id` |
+| ratings  | `GET/POST /api/v1/ratings`, `PATCH/DELETE /api/v1/ratings/:id` |
+| reviews  | `GET/POST /api/v1/reviews`, `PATCH/DELETE /api/v1/reviews/:id` |
 | wishlist | `GET/POST /api/v1/wishlist`, `PATCH/DELETE /api/v1/wishlist/:id` |
 
 ---
 
-## Database Models
+## Database
 
-Only two models are currently implemented.
+### Technology
 
-### Category
+MongoDB, accessed through Mongoose ODM. Connection string comes from `APP_URL`; `connectDB()` throws if it is missing.
+
+### Models
+
+Only three Mongoose models are actually implemented (the `User` model is defined in the `auth` module; `users.model.ts` is empty).
 
 ```text
+User
+ ├── username     (String, required, trimmed)
+ ├── email        (String, required, unique, trimmed)
+ ├── phoneNumber  (String, required, unique, trimmed)
+ ├── password     (String, required, minlength 6, stored bcrypt-hashed)
+ └── role         (String, enum ['merchant', 'admin'], default 'merchant')
+timestamps: true · versionKey: false
+
 Category
- ├── name     (String, required, trimmed)
- ├── image    (String, required)
- ├── slug     (String, required, unique, trimmed)
- └── owner    (ObjectId → User, required)
+ ├── name   (String, required, trimmed)
+ ├── image  (String, required)
+ ├── slug   (String, required, unique, trimmed)
+ └── owner  (ObjectId → User, required)
 timestamps: true · versionKey: false
-```
 
-### Brand
-
-```text
 Brand
- ├── name     (String, required, trimmed)
- ├── image    (String, required)
- ├── slug     (String, required, unique, trimmed)
- └── owner    (ObjectId → User, required)
+ ├── name   (String, required, trimmed)
+ ├── image  (String, required)
+ ├── slug   (String, required, unique, trimmed)
+ └── owner  (ObjectId → User, required)
 timestamps: true · versionKey: false
 ```
 
-### Relationships
+### Relationships & constraints
 
-- `Category.owner` references the `User` model — `Planned` (the `User` Mongoose model is not implemented yet).
-- `Brand.owner` references the `User` model — `Planned` (the `User` Mongoose model is not implemented yet).
-
-All other models (`User`, `Product`, `Cart`, `Coupon`, `Order`, `Payment`, `Rating`, `Review`, `Wishlist`) are `Planned` — their `*.model.ts` files are currently empty.
-
----
-
-## Authentication & Authorization
-
-Authentication and authorization are **planned but not implemented yet**.
-
-- No authentication middleware exists.
-- No JWT library is installed.
-- No user model exists.
-- No protected routes exist.
-- All routes are currently public.
-- `bcrypt`, `multer`, and `nodemailer` are installed as dependencies but are not used anywhere in the source.
-
-The `owner` fields on `Category` and `Brand` are intended to be tied to a user account, but that behavior is not implemented.
-
----
-
-## Validation & Error Handling
-
-### Validation
-
-- Request validation uses **express-validator** rules defined per module in `*.validation.ts`.
-- Rules are applied at the route level, followed by the shared `validateRequest` middleware.
-- `validateRequest` (`src/middlewares/validateRequest.ts`) collects `validationResult(req)` and, if invalid, responds with:
-
-```json
-{ "status": "fail", "errors": [...] }
+```mermaid
+erDiagram
+    User ||--o{ Category : owns
+    User ||--o{ Brand : owns
 ```
 
-with an HTTP `400` status.
+- `Category.owner` and `Brand.owner` reference the `User` model.
+- Unique indexes: `Category.slug`, `Brand.slug`, `User.email`, `User.phoneNumber`.
+- **Known issue:** category/brand create controllers do not pass the required `owner` field, so create requests currently fail with a Mongoose validation error (HTTP 500).
 
-- MongoDB ObjectId parameters are validated with `param('id').isMongoId()` (e.g., `validateCategoryId`, `validateBrandId`).
+All other `*.model.ts` files (`Product`, `Cart`, `Coupon`, `Order`, `Payment`, `Rating`, `Review`, `Wishlist`, and `users/User`) are **empty** — the only `User` model in the codebase is the one defined in `src/modules/auth/auth.model.ts`.
 
-### Error handling
+---
 
-- `errorHandler` (`src/middlewares/errorHandler.ts`) is registered as the final middleware and centralizes error responses:
+## Frontend
 
-```json
-{ "status": "error" | "fail", "message": "<error message>" }
+There is **no frontend** in this repository. The project is a backend API only; no client app, pages, or UI code exist.
+
+---
+
+## Authentication & Security
+
+What is actually implemented:
+
+- **Password hashing** — bcrypt with 12 salt rounds (`auth.controller.ts`).
+- **JWT issuance** — HS256 tokens signed with `TOKEN_SECRET`, `expiresIn: '1m'`, containing `userId` and `role`.
+- **Request validation** — express-validator chains on category and brand routes, enforced inline by the shared `validateRequest` middleware. Auth routes declare validation chains but do not apply `validateRequest` inline.
+- **CORS** — enabled globally via `cors()`.
+- **Body size limit** — `express.json({ limit: '1mb' })`.
+
+What is **not** implemented:
+
+- No `jwt.verify` usage — tokens are never validated, so there are no protected routes.
+- No role-based access control.
+- No rate limiting.
+- No security headers middleware (e.g., helmet).
+- No input sanitization beyond body validation.
+- No token revocation or blacklist on logout.
+- No 404 handler.
+
+---
+
+## Environment Variables
+
+Configuration is loaded with `dotenv` from `.env` (gitignored — **no `.env.example` is provided** in the repository).
+
+| Variable       | Used in                            | Purpose                          |
+| -------------- | ---------------------------------- | -------------------------------- |
+| `APP_PORT`     | `src/app.ts`                       | Port the HTTP server listens on  |
+| `APP_URL`      | `src/config/db.ts`                 | MongoDB connection string        |
+| `TOKEN_SECRET` | `src/modules/auth/auth.controller.ts` | Secret used to sign JWTs     |
+
+```env
+APP_PORT=3000
+APP_URL=mongodb://127.0.0.1:27017/on-store
+TOKEN_SECRET=your-random-secret
 ```
 
-- The HTTP status is `err.statusCode` when set, otherwise `500`.
-- `status` is `"error"` for `>= 500` and `"fail"` otherwise.
-
-### 404 handling
-
-- `Planned` — `src/middlewares/notFound.ts` exists but is **empty**, and no 404 handler is registered in `app.ts`. Unknown routes currently fall through to Express's default 404 response.
+> Do not commit a real `TOKEN_SECRET`; the value above is illustrative.
 
 ---
 
-## Configuration
-
-Environment configuration is loaded with `dotenv` from `.env` (gitignored — no `.env.example` is provided).
-
-Required environment variables (read from the source):
-
-| Variable   | Used in            | Purpose                         | Example value                        |
-| ---------- | ------------------ | ------------------------------- | ------------------------------------ |
-| `APP_PORT` | `src/app.ts`       | Port the HTTP server listens on | `3000`                               |
-| `APP_URL`  | `src/config/db.ts` | MongoDB connection string       | `mongodb://127.0.0.1:27017/on-store` |
-
-The default `connectDB()` throws if `APP_URL` is not defined. The database connection is established before the server starts listening.
-
----
-
-## Getting Started
+## Installation
 
 ### Prerequisites
 
-- Node.js
-- npm
-- MongoDB (local or remote connection string)
+- Node.js (with npm)
+- MongoDB (local instance or a MongoDB connection string)
 
-### Installation
+### Setup
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd "On Store Api"
+```
+
+2. Install dependencies:
 
 ```bash
 npm install
 ```
 
-### Environment
-
-Create a `.env` file at the project root with the required variables:
+3. Create a `.env` file at the project root (see [Environment Variables](#environment-variables)):
 
 ```bash
 APP_PORT=3000
 APP_URL=mongodb://127.0.0.1:27017/on-store
+TOKEN_SECRET=your-random-secret
 ```
 
-### Available scripts
+4. Make sure MongoDB is running, then start the development server:
 
-| Command          | Description                                                                   |
-| ---------------- | ----------------------------------------------------------------------------- |
-| `npm run dev`    | Start the dev server with hot reload (`nodemon --exec tsx src/app.ts`)        |
-| `npm run build`  | Compile TypeScript to `./dist` (`tsc`)                                        |
+```bash
+npm run dev
+```
+
+The server connects to MongoDB and then listens on `APP_PORT`. API base URL: `http://localhost:3000/api/v1`.
+
+---
+
+## Available Scripts
+
+| Command          | Description                                                    |
+| ---------------- | -------------------------------------------------------------- |
+| `npm run dev`    | Development server with hot reload (`nodemon --exec tsx src/app.ts`) |
+| `npm run build`  | Compile TypeScript to `./dist` (`tsc`)                         |
 | `npm start`      | Run the compiled app (`nodemon dist/app.js`) — requires `npm run build` first |
-| `npm run format` | Format the entire project (`prettier --write .`)                              |
+| `npm run format` | Format the whole project (`prettier --write .`)                |
 
-> There is currently **no test script** in `package.json`.
-
----
-
-## Current Progress
-
-### Completed
-
-- Project scaffolding — Node.js + TypeScript + Express 5 (ESM, strict TS).
-- Middleware setup — CORS, `morgan` logging, JSON body parsing (1 MB limit).
-- Database connection via Mongoose.
-- Centralized request validation middleware (`validateRequest`).
-- Centralized error-handling middleware (`errorHandler`).
-- **Categories module** — full CRUD + get-by-id with validation and pagination.
-- **Brands module** — full CRUD + get-by-id with validation and pagination (mirrors Categories).
-
-### In Progress
-
-- **Scaffolded modules** — `cart`, `coupons`, `orders`, `payments`, `products`, `ratings`, `reviews`, `users`, `wishlist`:
-  - routes and (empty) controller stubs exist
-  - models, services, and validations are empty files
-  - no functionality implemented
-
-### Planned
-
-- Authentication and authorization (no JWT/authentication middleware exists).
-- `User` model and ownership behavior for `owner` references.
-- Functional implementations for all scaffolded modules.
-- Working search/name filtering on list endpoints.
-- 404 handling middleware (`notFound.ts` is empty).
-- Tests (jest/supertest are installed but no tests or test script exist).
+There is **no test script** in `package.json`.
 
 ---
 
-## Roadmap
+## Testing
 
-```text
-Completed
-├── Express + TypeScript + MongoDB scaffolding
-├── Validation middleware + centralized error handling
-├── Categories module (CRUD + get by id + pagination)
-└── Brands module (CRUD + get by id + pagination)
-
-In Progress
-├── Scaffolded module skeletons (users, products, cart, coupons,
-│   orders, payments, ratings, reviews, wishlist)
-└── Fix create flow for owner-required models
-
-Next
-├── User model + authentication & authorization
-├── Ownership enforcement (owner fields)
-├── Product / Brand / Category relationships
-└── Tests (jest + supertest) and a test script
-
-Future
-├── Functional cart, orders, payments, coupons, ratings, reviews, wishlist
-├── Role-based access control (RBAC)
-├── File uploads (multer is installed)
-├── Email notifications (nodemailer is installed)
-├── Deployment and production hardening
-└── Reusable service layer (currently empty files)
-```
+**No tests are currently implemented.** `jest`, `ts-jest`, `supertest`, and related type packages are installed as dev dependencies, but there is no test script, no jest configuration, and no `*.test.*`/`*.spec.*` files. The only verification artifacts are the Postman collection requests and their in-collection scripts.
 
 ---
 
-## Development Conventions
+## Deployment
 
-The following conventions are currently followed by the codebase:
-
-- **Module/feature-based architecture** — each domain lives in `src/modules/<name>/`.
-- **Consistent file layout per module** — model, controller, service, validation, routes, index, README.
-- **Layered separation (routes → validation → controller → model)** — service files exist but are empty; controllers currently talk to Mongoose directly.
-- **Centralized middleware** — shared `validateRequest` and `errorHandler` in `src/middlewares/`.
-- **REST API under `/api/v1`**.
-- **TypeScript strict mode** with ES modules and `NodeNext` resolution.
-- **Mongoose models** with `timestamps: true` and `versionKey: false`.
-- **Prettier formatting** (`singleQuote`, `semi`, 2-space indent, print width 100).
+There is **no deployment configuration**: no Dockerfile, no CI/CD pipeline, no platform config (Heroku/Vercel/etc.), and no production environment setup. `npm start` runs the compiled output through `nodemon`, which is development-oriented. The project currently runs locally only.
 
 ---
 
-## Documentation
+## Current Project Status
 
-Architecture diagrams (`.drawio`) are stored in the `diagrams/` folder:
+### Implemented
 
-- `diagrams/E-commerc Diagram.drawio` — overall system architecture (target design).
-- One diagram per module, e.g. `diagrams/brands/brands.drawio`, `diagrams/categories/categories.drawio`.
+- Express + TypeScript + Mongoose scaffolding (ESM, strict TS).
+- Global middleware chain (CORS, morgan logging, JSON parsing, `validateRequest`, `errorHandler`).
+- Database connection via Mongoose (`config/db.ts`).
+- **Auth module** — register, login, logout with bcrypt hashing and JWT signing.
+- **Categories module** — CRUD + get by id + pagination + validation.
+- **Brands module** — CRUD + get by id + pagination + validation (mirrors Categories).
+- Postman collection with requests for the implemented endpoints.
 
-> The overall diagram represents a target architecture (including JWT, auth, services, file uploads, etc.) that is **not yet implemented** in the code. See the [Current Progress](#current-progress) section for the actual state.
+### Partially implemented / known broken flows
+
+- Register/login successfully hash and issue tokens, but tokens are never verified (no protected routes).
+- Category/Brand **create** routes fail at the database level because the required `owner` is validated but not persisted by the controller.
+
+### Registered but non-functional (scaffolded)
+
+- Module skeletons for `users`, `products`, `cart`, `coupons`, `orders`, `payments`, `ratings`, `reviews`, `wishlist` — routes exist; controllers are empty stubs; models/services/validations are empty. Requests to these endpoints never receive a response.
+
+### Not implemented
+
+- JWT verification / authentication middleware / protected routes.
+- Role-based access control (roles exist in the schema only).
+- 404 handler (`notFound.ts` is empty and unused).
+- Tests.
+- File uploads (multer installed, unused) and emails (nodemailer installed, unused).
+- Frontend and deployment configuration.
 
 ---
 
-## License
+## Limitations
 
-ISC
+- **No token verification** — `jwt.verify` is never used; any issued token is accepted nowhere and required nowhere. All endpoints are public.
+- **JWT expiry is 1 minute** (`expiresIn: '1m'`), which is impractical for real sessions and not configurable.
+- **Logout is a no-op** — it checks for an `Authorization` header and returns success; tokens are not invalidated or blacklisted.
+- **Auth validation is not enforced before handlers** — auth routes attach `registerValidation`/`loginValidation`/`tokenValidation` but do not run `validateRequest` inline; the global `validateRequest` runs only after a route completes, so invalid auth payloads are not rejected with `400` before the controller processes them.
+- **Password hash exposure** — register/login responses include the user document, which contains the bcrypt-hashed password.
+- **`owner` mismatch** — `createCategoryValidation`/`createBrandValidation` require `owner`, but the controllers drop it and the models require it, so creates fail (HTTP 500).
+- **`search` filter bug** — list controllers only apply the name filter when `search === 'string'` (a literal string comparison instead of a type check); real search values are ignored.
+- **Scaffolded endpoints hang** — empty controller stubs send no response.
+- **No 404 handling** — unknown routes return Express's default HTML 404 instead of a JSON envelope.
+- **No tests, no CI, no deployment config.**
+- **`src/middlewares/notFound.ts` and all `*.service.ts` files are empty** — the service layer is a file convention only.
+
+---
+
+## Future Improvements
+
+These are planned directions implied by the current codebase, **not implemented functionality**:
+
+- Authentication middleware that verifies JWTs and protects routes.
+- Persist `owner` on category/brand creation and enforce ownership.
+- Role-based access control for `merchant` / `admin`.
+- Functional implementations of the scaffolded modules (products, cart, orders, payments, coupons, ratings, reviews, wishlist, users).
+- Fix the `search` filter on list endpoints.
+- JSON 404 handler.
+- Automated tests with jest + supertest and a `test` script.
+- File upload support (multer is installed).
+- Email notifications (nodemailer is installed).
+- Production build/run and deployment setup.
+
+---
+
+## Development Notes
+
+- **Entry point:** `src/app.ts` registers global middleware and mounts all module routers; the server only starts after the MongoDB connection succeeds.
+- **Module convention:** controller / model / routes / validation / service / index per module. `index.ts` re-exports the module's public API.
+- **Service layer:** `*.service.ts` files are placeholders; controllers currently talk to Mongoose directly.
+- **Import style:** ESM with explicit `.js` extensions in relative imports (`import ... from './auth.routes.js'`).
+- **Formatting:** Prettier with `singleQuote`, `semi`, 2-space indent, print width 100 (see `src/.prettierrc`).
+- **Postman collection:** `postman/` contains a collection exercising the implemented endpoints. **Note:** the collection's embedded descriptions are partially stale — they state that login/logout and validation are unimplemented, but these are implemented in the current code (`auth.controller.ts`, `auth.validation.ts`).
+- **Diagrams:** `diagrams/` holds `.drawio` architecture files, including the target overall design (`E-commerc Diagram.drawio`) and per-module diagrams. The overall diagram describes a target architecture broader than the current implementation.
+- **Unused dependencies:** `multer` and `nodemailer` are installed but not referenced; jest/ts-jest/supertest are installed but no tests exist.
+- **TypeScript config:** strict mode, target ES2022, `NodeNext` module/resolution, `rootDir: src`, `outDir: dist`.
+
+---
+
+## Conclusion
+
+`on-store-api` is a cleanly scaffolded, module-based e-commerce backend. Its implemented surface today is a working authentication flow (register/login/logout with bcrypt and JWT) plus complete CRUD for categories and brands. The architecture — Express 5 + TypeScript + Mongoose with per-module file conventions and shared middleware — is well set up for expansion, but nine of twelve modules are still empty stubs, tokens are never verified, and there is no test or deployment setup. It is a solid foundation with the core identity and catalog workflows working, not yet a production-ready store platform.
