@@ -2,104 +2,107 @@
 import Brand from './brands.model.js';
 
 export const createBrand = async (req: Request, res: Response) => {
-  const { name, slug, image } = req.body;
-  const newBrand = await Brand.create({
-    name,
-    slug,
-    image,
-  });
-  console.log(newBrand, 'newBrand');
-  res.status(201).json({
-    status: 'success',
-    data: {
-      newBrand,
-    },
-  });
+    const { name, slug, image, owner } = req.body;
+
+    const newBrand = new Brand({
+        name,
+        slug,
+        image,
+        owner,
+    });
+    await newBrand.save();
+
+    res.status(201).json({
+        status: 'success',
+        data: {
+            newBrand,
+        },
+    });
 };
 export const deleteBrand = async (req: Request, res: Response) => {
-  const { id } = req.params;
+    const { id } = req.params;
 
-  const existedBrand = await Brand.findById(id);
+    const existedBrand = await Brand.findById(id);
 
-  if (!existedBrand) {
-    return res.status(404).json({
-      status: 'failed',
-      message: 'Brand not found',
+    if (!existedBrand) {
+        return res.status(404).json({
+            status: 'failed',
+            message: 'Brand not found',
+        });
+    }
+
+    await Brand.findByIdAndDelete(id);
+
+    res.status(200).json({
+        status: 'success',
+        message: 'Brand deleted successfully',
     });
-  }
-
-  await Brand.findByIdAndDelete(id);
-
-  res.status(200).json({
-    status: 'success',
-    message: 'Brand deleted successfully',
-  });
 };
 export const updateBrand = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { name, image } = req.body;
+    const { id } = req.params;
+    const { name, image } = req.body;
 
-  const updatedBrand = await Brand.findByIdAndUpdate(
-    id,
-    {
-      $set: {
-        name,
-        image,
-      },
-    },
-    {
-      new: true,
+    const updatedBrand = await Brand.findByIdAndUpdate(
+        id,
+        {
+            $set: {
+                name,
+                image,
+            },
+        },
+        {
+            new: true,
+        }
+    );
+
+    if (!updatedBrand) {
+        return res.status(404).json({
+            status: 'failed',
+            message: 'Brand not found',
+        });
     }
-  );
 
-  if (!updatedBrand) {
-    return res.status(404).json({
-      status: 'failed',
-      message: 'Brand not found',
+    res.status(200).json({
+        status: 'success',
+        data: {
+            updatedBrand,
+        },
     });
-  }
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      updatedBrand,
-    },
-  });
 };
 export const getBrand = async (req: Request, res: Response) => {
-  const { id } = req.params;
+    const { id } = req.params;
 
-  const brand = await Brand.findById(id);
+    const brand = await Brand.findById(id);
 
-  if (!brand) {
-    return res.status(404).json({
-      status: 'failed',
-      message: 'Brand not found',
+    if (!brand) {
+        return res.status(404).json({
+            status: 'failed',
+            message: 'Brand not found',
+        });
+    }
+
+    res.status(200).json({
+        status: 'success',
+        data: {
+            brand,
+        },
     });
-  }
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      brand,
-    },
-  });
 };
 export const getBrands = async (req: Request, res: Response) => {
-  const { page = 1, limit = 25, search } = req.query;
-  const pageNumber = Number(page);
-  const limitNumber = Number(limit);
-  const skip = (pageNumber - 1) * limitNumber;
-  const filters: Record<string, unknown> = {};
-  if (search === 'string' && search.trim()) {
-    filters.name = { $regex: search.trim(), $options: 'i' };
-  }
-  const allBrands = await Brand.find(filters).skip(skip).limit(limitNumber);
-  res.status(200).json({
-    status: 'success',
-    results: allBrands.length,
-    data: {
-      allBrands,
-    },
-  });
+    const { page = 1, limit = 25, search } = req.query;
+    const pageNumber = Number(page);
+    const limitNumber = Number(limit);
+    const skip = (pageNumber - 1) * limitNumber;
+    const filters: Record<string, unknown> = {};
+    if (typeof search === 'string' && search.trim()) {
+        filters.name = { $regex: search.trim(), $options: 'i' };
+    }
+    const allBrands = await Brand.find(filters).skip(skip).limit(limitNumber);
+    res.status(200).json({
+        status: 'success',
+        results: allBrands.length,
+        data: {
+            allBrands,
+        },
+    });
 };
