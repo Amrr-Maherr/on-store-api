@@ -1,0 +1,7 @@
+# Ignore artifacts:
+build
+coverage
+dist
+postman
+node_modules
+diagrams

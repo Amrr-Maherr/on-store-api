@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from './auth.model.js';
 export const register = async (req: Request, res: Response) => {
-    const { username, email, phoneNumber, password, role } = req.body;
+    const { username, email, phoneNumber, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const newUser = new User({
@@ -11,7 +11,6 @@ export const register = async (req: Request, res: Response) => {
         email,
         phoneNumber,
         password: hashedPassword,
-        role,
     });
     await newUser.save();
     const token = jwt.sign(
