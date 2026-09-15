@@ -2,14 +2,14 @@
 import Category from './categories.model.js';
 
 export const createCategory = async (req: Request, res: Response) => {
-    const { name, slug, image, owner } = req.body;
+    const { name, slug, owner } = req.body;
+    const image = (req as unknown as { file?: { path: string } }).file?.path || req.body.image;
 
-    const newCategory = new Category({
-        name,
-        slug,
-        image,
-        owner,
-    });
+    if (!image) {
+        return res.status(400).json({ status: 'fail', message: 'Category image is required' });
+    }
+
+    const newCategory = new Category({ name, slug, image, owner });
     await newCategory.save();
 
     res.status(201).json({
@@ -40,20 +40,14 @@ export const deleteCategory = async (req: Request, res: Response) => {
 };
 export const updateCategory = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { name, image } = req.body;
+    const { name } = req.body;
+    const image = (req as unknown as { file?: { path: string } }).file?.path || req.body.image;
 
-    const updatedCategory = await Category.findByIdAndUpdate(
-        id,
-        {
-            $set: {
-                name,
-                image,
-            },
-        },
-        {
-            new: true,
-        }
-    );
+    const updateFields: Record<string, unknown> = {};
+    if (name) updateFields.name = name;
+    if (image) updateFields.image = image;
+
+    const updatedCategory = await Category.findByIdAndUpdate(id, { $set: updateFields }, { new: true });
 
     if (!updatedCategory) {
         return res.status(404).json({
